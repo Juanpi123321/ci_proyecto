@@ -1,0 +1,73 @@
+
+/*
+en el header <title> <?php echo$title; ?></title>
+*/
+
+
+$data= array('title' => 'Bienvenido a Pc-Gamer','inicio' => 'active');
+
+
+
+//controlador de cliente para registrar  ; solo para validar los controles
+
+public function registrar_cliente
+{
+	$this->form_validation->set_rules('apellido', 'Apellido del usuario', 'required');
+	$this->form_validation->set_rules('nombre', 'Nombre del usuario', 'required');
+
+	$this->form_validation->set_rules('mail', 'Email', 'required l valid_email');
+
+	$this->form_validation->set_rules('password', 'Password', 'trim l required l min_length[8]';
+	$this->form_validation->set_rules('passconf', 'Confirmar password', 'trim l required l matches[password]');
+
+	
+$this->form_validation->set_message('valid_email', 'El campo %s debe ser un mail valido');
+
+	...
+$this->form_validation->set_message('matches', 'constraseñas no coinciden');
+
+	
+	if($this->form_validation->run() == FALSE){
+	
+		$this->registrarse();
+	}else {
+		$this->insertar_cliente();
+	}
+
+}
+
+
+//controlador insertar cliente
+public function 
+{
+
+	$apellido = $this->input->post('apellido');
+		...
+	$passconf = $this->input->post('passconf');
+
+
+	$this->load->model('cliente_model');
+	$this->cliente_model->guardar($apellido,..,$password);
+}
+
+
+
+//modelo cliente_model
+
+public function guardar($apellido,...,$password)
+{
+	$data = array(
+	 'apellido' => $apellido,
+		...
+	 'password' => $password,
+
+	//para encriptar 'password' => base64_encode($password),
+
+
+	 'perfil' => '3'
+	);
+	
+	$this->db->insert('clientes', $data);
+	redirect('cliente_controler/registrarse');		
+}
+
