@@ -71,3 +71,68 @@ public function guardar($apellido,...,$password)
 	redirect('cliente_controler/registrarse');		
 }
 
+
+
+
+
+
+
+----------------------------------------------------------
+
+libro_model
+
+function select_libros{
+	$this->db->select('*');
+	$this->db->from('libro');
+	$this->db->join('libro_categoria','libro_categoria.categoria_id = libro.libro_categoria');
+	$query = $this->db->get();	
+	return $query->result();     //si tenia 10 me hace un array de 10 libros
+}
+
+
+function select_libros_id($id){
+	
+	$this->db->select('*');
+	$this->db->from('libro');
+	$this->db->where('libro_id', '$id');
+	$query = $this->db->get();
+	return $query->result();
+
+}
+
+
+
+
+
+libro_controler
+	//nose que funcion era
+
+	$this->load->model('libro_model');
+	$data['libro'] = $this->libro_model->select_libros();
+
+	$this->load->view('plantillas/header');
+	$this->load->view('plantillas/navegar_admin_view');
+	$this->load->view('libros/listar_libros_view', $data);
+	$this->load->view('plantillas/footer');
+}
+
+
+
+
+
+para mostrar los productos
+<?php foreach($libro as $row) { ?>
+<tr>
+	<td>	<?php echo $row->libro_titulo; ?>	</td>
+			... (libro_  (autor, descripcion, stock))
+	<td>	<?php echo $row->libro_precio; ?>	</td>
+	<td> 	<?php echo $row->categoria_desc; ?>	</td>
+
+
+	<td>	<img src="<?php echo base_url('/uploads/imagenes_libro') .$row->libro_imagen?>" height="100" width="100" />   </td>
+
+</tr>
+
+	<?php } ?>
+
+

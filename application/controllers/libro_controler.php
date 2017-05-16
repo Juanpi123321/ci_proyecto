@@ -74,12 +74,12 @@ function guardar_libro()
                 $config['remove_spaces'] = TRUE;                 
                 $config['max_size'] = '1024';  
                            
-                $this->load->library('upload', $config);   
+                $this->load->library('upload', $config);   //cargo la libreria y le paso la configuracion
         	
         	if (!$this->upload->do_upload('imagen')) 
         	{  
            		echo "<script type=\"text/javascript\">alert('No se pudo cargar el archivo');</script>";  
-           		$this->index();  
+           		$this->index();  //$this->form_cargar_libro();  asi tenia el prof
         	} else {  
                 $data = array(
 	                	'libro_titulo' => $this->input->post('titulo'),
@@ -94,7 +94,7 @@ function guardar_libro()
                         $this->load->model('libro_model');                                    
                         $this->libro_model->guardar_libro($data);   
                   		
-                  		redirect('libro_controler');      
+                  		redirect('libro_controler');      //redirect('libro_controler/form_cargr_libro');  asi tenia el prof
                   	}
     }                      
 
