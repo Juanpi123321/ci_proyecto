@@ -23,16 +23,16 @@
 			<!-- formulario de CodeIgniter -->
 			<?php echo validation_errors(); ?> 
 
-			<?php echo form_open_multipart('admin_controller/actualizar', ['class' => 'form-signin', 'role' => 'form']); ?>
+			<?php echo form_open("admin_controller/actualizar/$Id_usuario", ['class' => 'form-signin', 'role' => 'form']); ?>
 				<div class="col-md-8 col-md-offset-2">				  
 					<label class="control-label" for="textinput">Nombre de Usuario:</label>
-					<?php echo form_input(['name' => 'usuario', 'id' => 'usuario' , 'class' => 'form-control', 'required' => 'required', 'value' => "$usuario"]); ?>
+					<?php echo form_input(['name' => 'usuario', 'id' => 'usuario' , 'class' => 'form-control', 'required' => 'required','autofocus' => 'autofocus', 'value' => "$usuario"]); ?>
 					<br>
 					<label class="control-label" for="textinput">E-mail:</label>
 					<?php echo form_input(['name' => 'email', 'id' => 'email' , 'class' => 'form-control', 'required' => 'required','type' => 'email', 'value' => "$email"]); ?>	
 					<br>
 					<label class="control-label" for="textinput">Nombre completo:</label>
-					<?php echo form_input(['name' => 'nombres', 'id' => 'nombres' , 'class' => 'form-control', 'required' => 'required', 'autofocus' => 'autofocus','type' => 'text', 'value' => "$nombres"]); ?>
+					<?php echo form_input(['name' => 'nombres', 'id' => 'nombres' , 'class' => 'form-control', 'required' => 'required', 'type' => 'text', 'value' => "$nombres"]); ?>
 					<br>					
 					<label class="control-label" for="textinput">Apellidos:</label>
 					<?php echo form_input(['name' => 'apellidos', 'id' => 'apellidos' , 'class' => 'form-control', 'required' => 'required','type' => 'text', 'value' => "$apellidos"]); ?>
@@ -45,7 +45,7 @@
 					<br>
 
 					  <?php echo form_submit('Editar Usuario','Editar Usuario',"class='btn btn-primary'"); ?>
-					  <?php echo form_submit('Limpiar','Limpiar',"class='btn btn-primary'"); ?>
+					  <a href="<?php echo base_url(); ?>admin_controller/usuarios"><button type="button" class="btn btn-primary">Volver atras</button></a>
 				</div>
 			<?php echo form_close();?>	<!-- Cierro el formulario -->
 		</div>

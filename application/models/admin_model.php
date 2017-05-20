@@ -46,10 +46,12 @@ public function select_usuarios_id($id)
       return $query->result();    
   }
 
-public function actualizar_usuario($data, $id)  
+public function actualizar_usuario($data_us,$data_per, $id)  
 {         
-    $this->db->where('Id_usuario', $id);       
-    $this->db->update('usuarios', $data);                               
+    $this->db->where('Id_usuario', $id);
+    $this->db->update('usuarios', $data_us);
+    $this->db->where('Id_persona', $id);
+    $this->db->update('personas', $data_per);
 }
 
 public function eliminar_usuario($data, $id)  

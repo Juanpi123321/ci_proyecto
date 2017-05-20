@@ -172,27 +172,12 @@ public function insertar_persona()
     		$this->load->view('plantillas/footer');      
    	} 
 
-    /* borra cuando no uses mas */
-   	public function actualizar_libro($id=NULL)      
-   	{   // VALIDAR LOS DATOS INGRESADOS   
-            $data = array(                   
-            	'libro_titulo' => $this->input->post('titulo'),                   
-            	'libro_autor' => $this->input->post('autor'),                   
-            	'libro_descripcion'=> $this->input->post('descripcion'),                   
-            	'libro_stock' =>  $this->input->post('stock'),                   
-            	'libro_precio'=>  $this->input->post('precio'),
-            	);      
-                
-                $this->load->model('libro_model');                  
-                $this->libro_model->actualizar_libro($data, $id);   
-                redirect('libro_controler/gestionar_libros');
-    }
-
     public function actualizar($id=NULL)      
     {   // VALIDAR LOS DATOS INGRESADOS   
-            $data = array(
-                'Id_usuario' => $this->input->post('Id_usuario'),
+            $data_us = array(
                 'usuario' => $this->input->post('usuario'),
+                );
+            $data_per = array(
                 'email' => $this->input->post('email'),
                 'nombres' => $this->input->post('nombres'),
                 'apellidos' => $this->input->post('apellidos'),
@@ -200,8 +185,9 @@ public function insertar_persona()
                 'direccion' => $this->input->post('direccion'),
                 ); 
                 
-                $this->load->model('admin_model');                  
-                $this->admin_model->actualizar_usuario($data, $id);   
+                /*$id = $this->input->post('Id_usuario');*/
+                $this->load->model('admin_model');
+                $this->admin_model->actualizar_usuario($data_us,$data_per, $id);   
                 redirect('admin_controller/usuarios');
     }
 
