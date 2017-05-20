@@ -1,6 +1,6 @@
 <?php 
 
-class Persona_model extends CI_Model
+class Admin_model extends CI_Model
 
 {
     function __construct()
@@ -25,8 +25,16 @@ public function guardar_usuario($id, $usuario, $password){
           );
 
           $this->db->insert('usuarios', $data);
-          redirect('persona_controller');
+          redirect('admin_controller/usuarios');
       
    }
+
+public function select_usuarios(){       
+    $this->db->select('*');       
+    $this->db->from('usuarios');    
+    $this->db->join('personas', 'personas.Id_persona = usuarios.persona_id');       
+    $query = $this->db->get();       
+    return $query->result();         
+  }   
 
  }

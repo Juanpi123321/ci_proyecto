@@ -18,25 +18,31 @@
 				 	<div class="col-md-8 col-md-offset-2">          
 				 		<table id="mytable" class="table table-bordred table-striped table-hover">       
 				 			<thead>                            
-				 				<th>Id</th>                            
-				 				<th>Nombre de Usuario</th>                            
-				 				<th>Contraseña</th>                            
-				 				<th>Id_persona</th>                            
-				 				<th>Estado</th>                                               
+				 				<th>Usuario</th>                            
+				 				<th>Email</th>                            
+				 				<th>Nombre</th>                            
+				 				<th>Apellido</th>                             
+				 				<th>DNI</th>                           
+				 				<th>Direccion</th>
+				 				<th></th>                         
 				 			</thead>     
 
 				 			<tbody>      
 				 				<?php foreach($usuarios as $row) { ?>  
 				 				<tr>                 
-				 					<td><?php  echo $row->Id_usuario; ?></td>
-				 					<td><?php  echo $row->usuario;  ?> </td>                 
-				 					<td><?php  echo $row->contrasena; ?></td>                 
-				 					<td class="text-center"><?php  echo $row->persona_id;?></td>                 
-				 					<td><?php  echo $row->estado;?></td>          
+				 					<td><?php  echo $row->usuario; ?></td>
+				 					<td><?php  echo $row->email; ?></td>
+				 					<td><?php  echo $row->nombres; ?></td>
+				 					<td><?php  echo $row->apellidos; ?></td>
+				 					<td><?php  echo $row->dni; ?></td>
+				 					<td><?php  echo $row->direccion; ?></td>
+				 					<td><img src="<?php echo base_url('uploads/img_usuarios/') . $row->imagen?>" height="100" width="100" /></td>
 				                </tr>
-				                <?php    } ?>    
+				                <?php    } ?>
 				            </tbody> 
 				    	</table>  
+				    	<br>
+				    	<a href="<?php echo base_url(); ?>/admin_controller/registracion_admin"><button class="btn btn-primary">Registrar Usuario</button></a>
 				    </div> 
 				</div> 
 
