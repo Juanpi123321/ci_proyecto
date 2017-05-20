@@ -28,7 +28,7 @@
 
 			<!-- Boton de sesion -->
 			<div class="btn-group navbar-right margen-boton-navbar">
-			  <button type="button" class="btn btn-primary btn-circle btn-lg dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-list"></i></button>
+			  <button type="button" class="btn btn-primary btn-circle btn-lg dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i></button> <!-- glyphicon-list -->
 			  <ul class="dropdown-menu" style="background: ghostwhite; color: black; text-align: center;">
 			    <li>Email del usuario</li>
 			    <br>

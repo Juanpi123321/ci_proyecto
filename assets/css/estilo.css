@@ -40,7 +40,15 @@ nav.navbar{
 }
 /*los elementos de la barra*/
 .navbar-default .navbar-nav > li > a{
-	color: ghostwhite;
+    color: ghostwhite;
+}
+/*navbar de administrativo*/
+nav.navbar-admin{
+    background: ghostwhite;
+}
+/*los elementos de la barra administrativo*/
+.navbar-admin .navbar-nav > li > a{
+    color: black;
 }
 /*cuando hacemos hover sobre algun elemento de la barra, o si lo abrimos*/
 .navbar-default .navbar-nav > li > a:hover, 
