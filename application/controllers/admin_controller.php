@@ -40,10 +40,6 @@ class Admin_controller extends CI_Controller {
 
 		$datos = array('inicio' => '', 'usuarios' => 'active', 'productos' => '');
 		$this->load->view('plantillas/nav_admin',$datos);
-
-		/*$this->load->model('usuario_model');
-		$data['usuarios'] = $this->usuario_model->select_usuarios(); 
-		$this->load->view('paginas/usuarios_admin', $data); */
 		$this->load->view('paginas/registracion_admin');
 		$this->load->view('plantillas/footer');
 	}
@@ -131,6 +127,83 @@ public function insertar_persona()
       } 
   }
 
+	public function eliminar_usuario($id=NULL)  
+    {            
+	 	$data = array('estado'=> '0');     
+            $this->load->model('admin_model');                   
+            $this->admin_model->actualizar_usuario($data, $id);                    
+            redirect('admin_controller/usuarios');    
+    }
+
+	public function activar_usuario($id=NULL)      
+	{            
+		$data = array('estado'=> '1');     
+            $this->load->model('admin_model');                   
+            $this->admin_model->actualizar_usuario($data, $id);                    
+            redirect('admin_controller/usuarios');    
+    }
+
+    public function editar_usuario($id=NULL)      
+    {             
+    	$this->load->model('admin_model');             
+    	$usuario = $this->admin_model->select_usuarios_id($id);
+      $persona = $this->admin_model->select_persona_id($id);   
+    
+    	foreach ($usuario as $row) 
+    	{         
+    		$data['Id_usuario'] = $row->Id_usuario;
+        $data['usuario'] = $row->usuario;
+    	}
+      foreach ($persona as $row) 
+      {         
+        $data['email'] = $row->email;
+        $data['nombres'] = $row->nombres;
+        $data['apellidos'] = $row->apellidos;
+        $data['dni'] = $row->dni;
+        $data['direccion'] = $row->direccion;
+        
+        
+      }      
+    		$titulo['title']= 'Usuarios';
+  			$this->load->view('plantillas/header',$titulo);
+  			$datos = array('inicio' => '', 'usuarios' => 'active', 'productos' => '');
+  			$this->load->view('plantillas/nav_admin',$datos);      
+    		$this->load->view('paginas/usuarios_edicion_admin', $data);        
+    		$this->load->view('plantillas/footer');      
+   	} 
+
+    /* borra cuando no uses mas */
+   	public function actualizar_libro($id=NULL)      
+   	{   // VALIDAR LOS DATOS INGRESADOS   
+            $data = array(                   
+            	'libro_titulo' => $this->input->post('titulo'),                   
+            	'libro_autor' => $this->input->post('autor'),                   
+            	'libro_descripcion'=> $this->input->post('descripcion'),                   
+            	'libro_stock' =>  $this->input->post('stock'),                   
+            	'libro_precio'=>  $this->input->post('precio'),
+            	);      
+                
+                $this->load->model('libro_model');                  
+                $this->libro_model->actualizar_libro($data, $id);   
+                redirect('libro_controler/gestionar_libros');
+    }
+
+    public function actualizar($id=NULL)      
+    {   // VALIDAR LOS DATOS INGRESADOS   
+            $data = array(
+                'Id_usuario' => $this->input->post('Id_usuario'),
+                'usuario' => $this->input->post('usuario'),
+                'email' => $this->input->post('email'),
+                'nombres' => $this->input->post('nombres'),
+                'apellidos' => $this->input->post('apellidos'),
+                'dni' => $this->input->post('dni'),
+                'direccion' => $this->input->post('direccion'),
+                ); 
+                
+                $this->load->model('admin_model');                  
+                $this->admin_model->actualizar_usuario($data, $id);   
+                redirect('admin_controller/usuarios');
+    }
 
 
 

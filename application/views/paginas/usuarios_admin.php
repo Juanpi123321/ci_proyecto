@@ -15,7 +15,7 @@
 				</div>        
 				 <!-- /.row -->               
 				 <div class="row">      
-				 	<div class="col-md-8 col-md-offset-2">          
+				 	<div class="col-md-8 col-md-offset-1">          
 				 		<table id="mytable" class="table table-bordred table-striped table-hover">       
 				 			<thead>                            
 				 				<th>Usuario</th>                            
@@ -24,6 +24,8 @@
 				 				<th>Apellido</th>                             
 				 				<th>DNI</th>                           
 				 				<th>Direccion</th>
+				 				<th>Imagen</th>
+				 				<th></th>
 				 				<th></th>                         
 				 			</thead>     
 
@@ -37,6 +39,28 @@
 				 					<td><?php  echo $row->dni; ?></td>
 				 					<td><?php  echo $row->direccion; ?></td>
 				 					<td><img src="<?php echo base_url('uploads/img_usuarios/') . $row->imagen?>" height="100" width="100" /></td>
+				 					<td>
+				 						<a class="btn btn-success" href="<?php echo base_url("admin_controller/editar_usuario/$row->Id_usuario");?>" >
+				 							<span class="glyphicon glyphicon-pencil"></span>
+				 						</a>
+				 					</td>
+
+				 					<?php if ( ($row->estado) ==1 )            
+				 						{ ?>  
+							                <td>
+							                	<a class="btn btn-danger" href="<?php echo base_url("admin_controller/eliminar_usuario/$row->Id_usuario");?>" >
+							                		<span class="glyphicon glyphicon-trash"></span>
+							                	</a>
+								            </td>            
+								        <?php } else {  ?>  
+							                <td>    
+							                	<a class="btn btn-danger" href="<?php echo base_url("admin_controller/activar_usuario/$row->Id_usuario");?>" >
+							                		<span class="glyphicon glyphicon-glyphicon glyphicon-ok"></span>
+							                	</a>
+							                </td>  
+							     		<?php }    ?>
+
+
 				                </tr>
 				                <?php    } ?>
 				            </tbody> 
