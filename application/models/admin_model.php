@@ -32,10 +32,16 @@ public function guardar_usuario($id, $usuario, $password){
 public function select_usuarios(){       
     $this->db->select('*');       
     $this->db->from('usuarios');    
-    $this->db->join('personas', 'personas.Id_persona = usuarios.persona_id');       
+    $this->db->join('personas', 'personas.Id_persona = usuarios.persona_id');
+    $this->db->join('rol', 'rol.Id_rol = personas.rol_id');       
     $query = $this->db->get();       
     return $query->result();         
-  }   
+  }
+
+public function select_rol(){     
+    $query = $this->db->get('rol_id');           
+    return $query->result();    
+  }
 
 public function select_usuarios_id($id)  
    {                          
@@ -54,7 +60,7 @@ public function actualizar_usuario($data_us,$data_per, $id)
     $this->db->update('personas', $data_per);
 }
 
-public function eliminar_usuario($data, $id)  
+public function estado_usuario($data, $id)  
 {                                  
     $this->db->where('Id_usuario', $id);       
     $this->db->update('usuarios', $data);                               

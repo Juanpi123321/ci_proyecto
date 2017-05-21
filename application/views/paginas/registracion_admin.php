@@ -72,7 +72,7 @@
 				    </div>
 				    
 					  <?php echo form_submit('Registrar Usuario','Registrar Usuario',"class='btn btn-primary'"); ?>
-					  <?php echo form_submit('Limpiar','Limpiar',"class='btn btn-primary'"); ?>
+					  <a href="<?php echo base_url(); ?>admin_controller/usuarios"><button type="button" class="btn btn-primary">Volver atras</button></a>
 				</div>
 			<?php echo form_close();?>	<!-- Cierro el formulario -->
 		</div>

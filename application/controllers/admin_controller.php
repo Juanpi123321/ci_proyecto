@@ -28,7 +28,7 @@ class Admin_controller extends CI_Controller {
 		$this->load->view('plantillas/nav_admin',$datos);
 
 		$this->load->model('admin_model');
-		$data['usuarios'] = $this->admin_model->select_usuarios(); 
+		$data['usuarios'] = $this->admin_model->select_usuarios();
 		$this->load->view('paginas/usuarios_admin', $data);
 		$this->load->view('plantillas/footer');
 	}
@@ -131,7 +131,7 @@ public function insertar_persona()
     {            
 	 	$data = array('estado'=> '0');     
             $this->load->model('admin_model');                   
-            $this->admin_model->actualizar_usuario($data, $id);                    
+            $this->admin_model->estado_usuario($data, $id);                    
             redirect('admin_controller/usuarios');    
     }
 
@@ -139,7 +139,7 @@ public function insertar_persona()
 	{            
 		$data = array('estado'=> '1');     
             $this->load->model('admin_model');                   
-            $this->admin_model->actualizar_usuario($data, $id);                    
+            $this->admin_model->estado_usuario($data, $id);                    
             redirect('admin_controller/usuarios');    
     }
 
@@ -185,7 +185,6 @@ public function insertar_persona()
                 'direccion' => $this->input->post('direccion'),
                 ); 
                 
-                /*$id = $this->input->post('Id_usuario');*/
                 $this->load->model('admin_model');
                 $this->admin_model->actualizar_usuario($data_us,$data_per, $id);   
                 redirect('admin_controller/usuarios');
