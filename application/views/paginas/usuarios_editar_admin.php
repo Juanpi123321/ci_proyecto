@@ -18,8 +18,6 @@
 		<div class="row">
 			<h4 class="text-center">Editar usuario</h4>
 			<br>
-			<!-- <form class="form-horizontal">  //ese es el form de bootstrap-->
-
 			<!-- formulario de CodeIgniter -->
 			<?php echo validation_errors(); ?> 
 

@@ -291,4 +291,43 @@ $this->form_validation->set_message('required', 'El campo %s es obligatorio');
       } 
   }
 
+  public function actualizar_producto($id=NULL)      
+    {   // VALIDAR LOS DATOS INGRESADOS  
+            $data = array(
+                'nombre' => $this->input->post('nombre'),
+                'caracteristica' => $this->input->post('caracteristica'),
+                'precio' => $this->input->post('precio'),
+                'stock' => $this->input->post('stock'),
+                'categoria_id' => $this->input->post('categoria'),
+                ); 
+                
+                $this->load->model('admin_model');
+                $this->admin_model->actualizar_producto($data, $id);   
+                redirect('admin_controller/productos');
+    }
+
+    public function editar_producto($id=NULL)      
+    {             
+      $this->load->model('admin_model');             
+      $producto = $this->admin_model->select_productos_id($id);
+    
+      foreach ($producto as $row) 
+      {         
+        $data['Id_producto'] = $row->Id_producto;
+        $data['nombre'] = $row->nombre;
+        $data['caracteristica'] = $row->caracteristica;
+        $data['precio'] = $row->precio;
+        $data['stock'] = $row->stock;
+        $data['categoria_id'] = $row->categoria_id;
+        $data['imagen'] = $row->imagen;
+
+      }
+        $titulo['title']= 'Productos';
+        $this->load->view('plantillas/header',$titulo);
+        $datos = array('inicio' => '', 'usuarios' => '', 'productos' => 'active');
+        $this->load->view('plantillas/nav_admin',$datos);      
+        $this->load->view('paginas/productos_editar_admin', $data);        
+        $this->load->view('plantillas/footer');      
+    }
+
 }

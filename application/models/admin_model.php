@@ -96,4 +96,19 @@ public function select_productos(){
         redirect('admin_controller/productos');
   }
 
+  public function actualizar_producto($data, $id)  
+{         
+    $this->db->where('Id_producto', $id);
+    $this->db->update('productos', $data);
+}
+
+  public function select_productos_id($id)  
+   {                          
+      $this->db->select('*');                           
+      $this->db->from('productos');                           
+      $this->db->where('Id_producto', $id);                           
+      $query = $this->db->get();                           
+      return $query->result();    
+  }
+
 }
