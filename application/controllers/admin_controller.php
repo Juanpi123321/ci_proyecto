@@ -136,7 +136,7 @@ public function insertar_persona()
     }
 
 	public function activar_usuario($id=NULL)      
-	{            
+	  {
 		$data = array('estado'=> '1');     
             $this->load->model('admin_model');                   
             $this->admin_model->estado_usuario($data, $id);                    
@@ -168,7 +168,7 @@ public function insertar_persona()
   			$this->load->view('plantillas/header',$titulo);
   			$datos = array('inicio' => '', 'usuarios' => 'active', 'productos' => '');
   			$this->load->view('plantillas/nav_admin',$datos);      
-    		$this->load->view('paginas/usuarios_edicion_admin', $data);        
+    		$this->load->view('paginas/usuarios_editar_admin', $data);        
     		$this->load->view('plantillas/footer');      
    	} 
 
@@ -199,8 +199,96 @@ public function insertar_persona()
 
 		$datos = array('inicio' => '', 'usuarios' => '', 'productos' => 'active');
 		$this->load->view('plantillas/nav_admin',$datos);
-		$this->load->view('paginas/productos_admin');
+    
+    $this->load->model('admin_model');
+    $data['productos'] = $this->admin_model->select_productos();
+    $this->load->view('paginas/productos_admin', $data);
 		$this->load->view('plantillas/footer');
 	}
+
+  public function baja_producto($id=NULL)  
+    {            
+    $data = array('estado'=> '0');     
+            $this->load->model('admin_model');                   
+            $this->admin_model->estado_producto($data, $id);                    
+            redirect('admin_controller/productos');    
+    }
+
+  public function alta_producto($id=NULL)      
+    {
+    $data = array('estado'=> '1');     
+            $this->load->model('admin_model');                   
+            $this->admin_model->estado_producto($data, $id);                    
+            redirect('admin_controller/productos');    
+    }
+
+  public function productos_agregar_admin()
+  {
+    $data['title']= 'Agregar Producto';
+    $this->load->view('plantillas/header',$data);
+
+    $datos = array('inicio' => '', 'usuarios' => '', 'productos' => 'active');
+    $this->load->view('plantillas/nav_admin',$datos);
+    $this->load->view('paginas/productos_agregar_admin');
+    $this->load->view('plantillas/footer');
+  }
+
+  public function verificar_producto() //verifica todos los campos
+
+  {          
+   $this->form_validation->set_rules('nombre', 'Nombre del producto', 'required');
+   $this->form_validation->set_rules('caracteristica', 'Caracteristica del producto', 'required');
+   
+   $this->form_validation->set_rules('precio', 'Precio', 'required|decimal');
+   $this->form_validation->set_rules('stock', 'Stock|integer');
+   $this->form_validation->set_rules('categoria', 'Categoria', 'required');
+
+   $this->form_validation->set_rules('imagen', 'Seleccionar una imagen',  'callback_validar_imagen');
+
+
+/*para que mustre el mensaje con esa leyendo o sino va a mostrar en ingles*/
+$this->form_validation->set_message('decimal', 'El campo %s debe poseer solo numeros decimales');
+$this->form_validation->set_message('integer', 'El campo %s debe poseer solo numeros enteros');
+$this->form_validation->set_message('required', 'El campo %s es obligatorio');
+
+
+   if ($this->form_validation->run() == FALSE) {
+
+                $this->productos_agregar_admin();
+
+        } else {
+           $this->insertar_producto();
+            
+        }         
+          
+     }
+
+  public function insertar_producto()
+  { 
+        $config['upload_path'] = './uploads/img_productos';            
+        $config['allowed_types'] = 'jpg|JPG|jpeg|JPEG|png|PNG';            
+        $config['remove_spaces'] = TRUE;            
+        $config['max_size'] = '1024';  
+
+        $this->load->library('upload', $config);   
+        if (!$this->upload->do_upload('imagen')) 
+    {  
+      echo "<script type=\"text/javascript\">alert('No se pudo cargar el archivo');</script>";
+          $this->productos_agregar_admin();  
+    } else {
+          $data = array(
+                 'nombre' => $this->input->post('nombre'),
+                 'caracteristica' => $this->input->post('caracteristica'),
+                 'precio ' => $this->input->post('precio'),
+                 'stock' => $this->input->post('stock'),
+                 'imagen' => $_FILES['imagen']['name'],
+                 'categoria_id' => $this->input->post('categoria'),
+                 'estado' => '1'
+                 );
+
+      $this->load->model('admin_model');
+      $this->admin_model->guardar_producto($data);
+      } 
+  }
 
 }

@@ -5,7 +5,7 @@
 		<div class="row">
 			<br>
 			<div class="titulo text-center">
-				<h2>REGISTRO DE USUARIO</h2>
+				<h2>MODIFICAR DATOS DE USUARIO</h2>
 			</div>
 		</div>
 		<br>

@@ -8,12 +8,77 @@
 					<h2>GESTION DE PRODUCTOS</h2>
 				</div>
 				<br>
-				<img src="<?php echo base_url(); ?>/assets/img/restringido.jpg">
-				<!-- corregir -->
+				<img style="width: 38%; margin-left: 30%;" src="<?php echo base_url(); ?>/assets/img/almacen.png">
 				<br><br>
-				<h2 class="text-center">ATENCION</h2>
-				<h3 class="text-center" style="margin: 30px;">Esta accediendo a un menu restringido solo para el personal administrativo de la empresa</h3>
-				<br><br>
+				<div class="row">
+				    <div class="col-xs-8 col-xs-offset-1 col-sm-8 col-sm-offset-1 col-md-6 col-md-offset-3">
+				    	<h1 class="page-header" style="text-align:center;">Listado de Productos</h1>        
+				    </div>
+				    <div class="col-xs-1 col-xs-offset-0 col-sm-1 col-sm-offset-0 col-md-offset-1">
+				    	<a href="<?php echo base_url(); ?>/admin_controller/productos_agregar_admin"><button class="btn btn-primary">Agregar Producto</button></a>
+				    </div>
+				</div>
+				<!-- Tabla de Productos -->               
+				 <div class="row">      
+				 	<div class="col-xs-12 col-md-offset-0">          
+				 		<table id="tproductos" class="table table-bordred table-striped table-hover">       
+				 			<thead>            
+				 				<th>Imagen del producto</th>                
+				 				<th>Nombre</th>
+				 				<th>Caracteristica</th>
+				 				<th>Stock</th>
+				 				<th>Precio</th>
+				 				<th>Categoria</th>
+				 				<th></th>
+				 				<th></th>
+				 			</thead>     
+
+				 			<tbody>      
+				 				<?php foreach($productos as $row) { ?>  
+				 				<tr>   
+				 					<td><img src="<?php echo base_url('uploads/img_productos/') . $row->imagen?>" height="200" width="200" /></td>           
+				 					<td><?php  echo $row->nombre; ?></td>
+				 					<td><?php  echo $row->caracteristica?></td>
+				 					<td><?php  echo $row->stock; ?></td>
+				 					<td><?php  echo $row->precio; ?></td>
+				 					<td><?php  echo $row->descripcion; ?></td>		 					
+			 						<td>
+			 							<a class="btn btn-success" href="<?php echo base_url("admin_controller/editar_producto/$row->Id_producto");?>" >
+			 								<span class="glyphicon glyphicon-pencil"></span>
+			 							</a>
+			 						</td>
+				 					<?php if ( ($row->estado) ==1 )            
+				 						{ ?>  
+							                <td>
+							                	<a class="btn btn-danger" href="<?php echo base_url("admin_controller/baja_producto/$row->Id_producto");?>" >
+							                		<span class="glyphicon glyphicon-trash"></span>
+							                	</a>
+								            </td>            
+								        <?php } else {  ?>  
+							                <td>    
+							                	<a class="btn btn-danger" href="<?php echo base_url("admin_controller/alta_producto/$row->Id_producto");?>" >
+							                		<span class="glyphicon glyphicon-glyphicon glyphicon-ok"></span>
+							                	</a>
+							                </td>  
+							     		<?php }    ?>
+
+
+				                </tr>
+				                <?php    } ?>
+				            </tbody> 
+				    	</table>  
+				    	<br>
+				    </div> 
+				</div>
+
+
+
+
+
+
+
+
+				<br>
 			</div>
 
 			<br><br>

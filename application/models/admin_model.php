@@ -75,4 +75,25 @@ public function select_persona_id($id)
     return $query->result();    
 }
 
+/*PRODUCTOS*/
+
+public function select_productos(){       
+    $this->db->select('*');       
+    $this->db->from('productos');    
+    $this->db->join('categoria', 'categoria.Id_categoria = productos.categoria_id');
+    $query = $this->db->get();       
+    return $query->result();         
+  }
+
+  public function estado_producto($data, $id)  
+  {                                  
+    $this->db->where('Id_producto', $id);       
+    $this->db->update('productos', $data);                               
+  }
+
+  public function guardar_producto($data){
+        $this->db->insert('productos', $data);
+        redirect('admin_controller/productos');
+  }
+
 }
