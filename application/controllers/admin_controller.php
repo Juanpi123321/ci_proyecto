@@ -15,6 +15,7 @@ class Admin_controller extends CI_Controller {
 
 		$datos = array('inicio' => 'active', 'usuarios' => '', 'productos' => '');
     $datos['nombres'] = $this->session->userdata('nombres');
+    $datos['apellidos'] = $this->session->userdata('apellidos');
     $datos['imagen'] = $this->session->userdata('imagen');
     $datos['nombre_usuario'] = $this->session->userdata('nombre_usuario');
 		$this->load->view('plantillas/nav_admin',$datos);
@@ -29,6 +30,7 @@ class Admin_controller extends CI_Controller {
 
 		$datos = array('inicio' => '', 'usuarios' => 'active', 'productos' => '');
     $datos['nombres'] = $this->session->userdata('nombres');
+    $datos['apellidos'] = $this->session->userdata('apellidos');
     $datos['imagen'] = $this->session->userdata('imagen');
     $datos['nombre_usuario'] = $this->session->userdata('nombre_usuario');
 		$this->load->view('plantillas/nav_admin',$datos);
@@ -46,6 +48,7 @@ class Admin_controller extends CI_Controller {
 
 		$datos = array('inicio' => '', 'usuarios' => 'active', 'productos' => '');
     $datos['nombres'] = $this->session->userdata('nombres');
+    $datos['apellidos'] = $this->session->userdata('apellidos');
     $datos['imagen'] = $this->session->userdata('imagen');
     $datos['nombre_usuario'] = $this->session->userdata('nombre_usuario');
 		$this->load->view('plantillas/nav_admin',$datos);
@@ -185,6 +188,7 @@ public function insertar_persona()
   			$this->load->view('plantillas/header',$titulo);
   			$datos = array('inicio' => '', 'usuarios' => 'active', 'productos' => '');
         $datos['nombres'] = $this->session->userdata('nombres');
+        $datos['apellidos'] = $this->session->userdata('apellidos');
         $datos['imagen'] = $this->session->userdata('imagen');
         $datos['nombre_usuario'] = $this->session->userdata('nombre_usuario');
   			$this->load->view('plantillas/nav_admin',$datos);      
@@ -212,6 +216,7 @@ public function insertar_persona()
       $this->load->view('plantillas/header',$titulo);
       $datos = array('inicio' => '', 'usuarios' => 'active', 'productos' => '');
       $datos['nombres'] = $this->session->userdata('nombres');
+      $datos['apellidos'] = $this->session->userdata('apellidos');
       $datos['imagen'] = $this->session->userdata('imagen');
       $datos['nombre_usuario'] = $this->session->userdata('nombre_usuario');
       $this->load->view('plantillas/nav_admin',$datos);   
@@ -246,6 +251,7 @@ public function insertar_persona()
 
 		$datos = array('inicio' => '', 'usuarios' => '', 'productos' => 'active');
     $datos['nombres'] = $this->session->userdata('nombres');
+    $datos['apellidos'] = $this->session->userdata('apellidos');
     $datos['imagen'] = $this->session->userdata('imagen');
     $datos['nombre_usuario'] = $this->session->userdata('nombre_usuario');
 		$this->load->view('plantillas/nav_admin',$datos);
@@ -279,6 +285,7 @@ public function insertar_persona()
 
     $datos = array('inicio' => '', 'usuarios' => '', 'productos' => 'active');
     $datos['nombres'] = $this->session->userdata('nombres');
+    $datos['apellidos'] = $this->session->userdata('apellidos');
     $datos['imagen'] = $this->session->userdata('imagen');
     $datos['nombre_usuario'] = $this->session->userdata('nombre_usuario');
     $this->load->view('plantillas/nav_admin',$datos);
@@ -379,6 +386,7 @@ $this->form_validation->set_message('required', 'El campo %s es obligatorio');
         $this->load->view('plantillas/header',$titulo);
         $datos = array('inicio' => '', 'usuarios' => '', 'productos' => 'active');
         $datos['nombres'] = $this->session->userdata('nombres');
+        $datos['apellidos'] = $this->session->userdata('apellidos');
         $datos['imagen'] = $this->session->userdata('imagen');
         $datos['nombre_usuario'] = $this->session->userdata('nombre_usuario');
         $this->load->view('plantillas/nav_admin',$datos);      

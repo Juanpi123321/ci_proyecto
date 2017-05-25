@@ -14,8 +14,18 @@ class Login_controller extends CI_Controller {
     $data['title']= 'Bienvenido a Pc-Gamer';
     $this->load->view('plantillas/header',$data);
 
-    $datos = array('inicio' => 'active', 'contacto' => '', 'nosotros' => '');
-    $this->load->view('plantillas/nav_ingresar',$datos);
+    $datos = array('inicio' => 'active', 'contacto' => '', 'nosotros' => '', 'productos' => '');
+    if ($this->session->userdata('login'))
+        {
+          $datos['nombres'] = $this->session->userdata('nombres');
+          $datos['apellidos'] = $this->session->userdata('apellidos');
+          $datos['imagen'] = $this->session->userdata('imagen');
+          $datos['nombre_usuario'] = $this->session->userdata('nombre_usuario');
+          $this->load->view('plantillas/nav_salir',$datos); 
+        } else {
+                $this->load->view('plantillas/nav_ingresar',$datos);
+        }
+
     $this->load->view('paginas/login_usuario');
     $this->load->view('plantillas/footer');
   }
@@ -73,10 +83,10 @@ class Login_controller extends CI_Controller {
             redirect('admin_controller');
             break;        
           case '2':
-            redirect('persona_controller');
+            redirect('pcgamer/productos');
             break; 
           case '3':
-            redirect('persona_controller');   //en este caso cliente va a ser igual que empledo
+            redirect('pcgamer/productos');   //en este caso cliente va a ser igual que empleado
             break;                         
           default:
             redirect('index'); 

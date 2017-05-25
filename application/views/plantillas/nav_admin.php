@@ -28,13 +28,12 @@
 					<img src="<?php echo base_url('uploads/img_usuarios/') . $imagen?>" height="50" width="50"/>
 				  </div>
 				  <div class="col-md-2 col-md-offset-2">
-				    <li><b>&nbsp<?= $nombres?>&nbsp</b></li>
+				    <li><b>&nbsp<?= $nombres?>&nbsp<?= $apellidos?>&nbsp</b></li>
 				    <br>
 				    <li>&nbsp<?= $nombre_usuario?>&nbsp</li>
 				   </div>
 				 </div>
 				 	<hr style="margin-top: 10px; margin-bottom: 3px;">
-				    <!-- <li role="separator" class="divider"></li> -->
 				    <a href="<?php echo base_url();?>login_controller/cerrar_sesion" title=""><button type="button" class="btn btn-primary btn-sm navbar-btn" data-toggle="modal" data-target=#Cerrar>Cerrar Sesion</button></a>
 			  </ul>
 			</div>

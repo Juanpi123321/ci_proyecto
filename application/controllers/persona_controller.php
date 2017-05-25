@@ -15,8 +15,17 @@ public function index()
     $data['title']= 'Bienvenido a Pc-Gamer';
     $this->load->view('plantillas/header',$data);
 
-    $datos = array('inicio' => '', 'contacto' => '', 'nosotros' => '');
-    $this->load->view('plantillas/nav_salir',$datos);
+    $datos = array('inicio' => '', 'contacto' => '', 'nosotros' => '', 'productos' => '');
+    if ($this->session->userdata('login'))
+        {
+          $datos['nombres'] = $this->session->userdata('nombres');
+          $datos['apellidos'] = $this->session->userdata('apellidos');
+          $datos['imagen'] = $this->session->userdata('imagen');
+          $datos['nombre_usuario'] = $this->session->userdata('nombre_usuario');
+          $this->load->view('plantillas/nav_salir',$datos); 
+        } else {
+                $this->load->view('plantillas/nav_ingresar',$datos);
+        }
 
     $this->load->view('paginas/productos');
     $this->load->view('plantillas/footer');
@@ -29,7 +38,7 @@ public function registracion()
     $data['title']= 'Registracion';
     $this->load->view('plantillas/header',$data);
 
-    $datos = array('inicio' => '', 'contacto' => '', 'nosotros' => '');
+    $datos = array('inicio' => '', 'contacto' => '', 'nosotros' => '', 'productos' => '');
     $this->load->view('plantillas/nav_ingresar',$datos);
     $this->load->view('paginas/registracion');
     $this->load->view('plantillas/footer');

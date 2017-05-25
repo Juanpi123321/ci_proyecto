@@ -13,19 +13,61 @@ class Pcgamer extends CI_Controller {
 		$data['title']= 'Bienvenido a Pc-Gamer';
 		$this->load->view('plantillas/header',$data);
 
-		$datos = array('inicio' => 'active', 'contacto' => '', 'nosotros' => '');
-		$this->load->view('plantillas/nav_ingresar',$datos);
+		$datos = array('inicio' => 'active', 'contacto' => '', 'nosotros' => '', 'productos' => '');
+		if ($this->session->userdata('login'))
+      	{
+      		$datos['nombres'] = $this->session->userdata('nombres');
+      		$datos['apellidos'] = $this->session->userdata('apellidos');
+		    $datos['imagen'] = $this->session->userdata('imagen');
+		    $datos['nombre_usuario'] = $this->session->userdata('nombre_usuario');
+      		$this->load->view('plantillas/nav_salir',$datos);	
+      	} else {
+				$this->load->view('plantillas/nav_ingresar',$datos);
+      	}
+
 		$this->load->view('paginas/index');
 		$this->load->view('plantillas/footer');
 	}
+
+	public function productos()
+  {
+
+    $data['title']= 'Bienvenido a Pc-Gamer';
+    $this->load->view('plantillas/header',$data);
+
+    $datos = array('inicio' => '', 'contacto' => '', 'nosotros' => '', 'productos' => 'active');
+    if ($this->session->userdata('login'))
+        {
+          $datos['nombres'] = $this->session->userdata('nombres');
+          $datos['apellidos'] = $this->session->userdata('apellidos');
+          $datos['imagen'] = $this->session->userdata('imagen');
+          $datos['nombre_usuario'] = $this->session->userdata('nombre_usuario');
+          $this->load->view('plantillas/nav_salir',$datos); 
+        } else {
+                $this->load->view('plantillas/nav_ingresar',$datos);
+        }
+
+    $this->load->view('paginas/productos');
+    $this->load->view('plantillas/footer');
+   
+}
 
 	public function contacto()
 	{
 		$data['title']= 'Contacto';
 		$this->load->view('plantillas/header',$data);
 
-		$datos = array('inicio' => '', 'contacto' => 'active', 'nosotros' => '');
-		$this->load->view('plantillas/nav_ingresar',$datos);
+		$datos = array('inicio' => '', 'contacto' => 'active', 'nosotros' => '', 'productos' => '');
+		if ($this->session->userdata('login'))
+      	{
+      		$datos['nombres'] = $this->session->userdata('nombres');
+      		$datos['apellidos'] = $this->session->userdata('apellidos');
+		    $datos['imagen'] = $this->session->userdata('imagen');
+		    $datos['nombre_usuario'] = $this->session->userdata('nombre_usuario');
+      		$this->load->view('plantillas/nav_salir',$datos);	
+      	} else {
+				$this->load->view('plantillas/nav_ingresar',$datos);
+      	}
 		$this->load->view('paginas/contacto');
 		$this->load->view('plantillas/footer');
 	}
@@ -35,8 +77,17 @@ class Pcgamer extends CI_Controller {
 		$data['title']= 'Registracion';
 		$this->load->view('plantillas/header',$data);
 
-		$datos = array('inicio' => '', 'contacto' => '', 'nosotros' => '');
-		$this->load->view('plantillas/nav_ingresar',$datos);
+		$datos = array('inicio' => '', 'contacto' => '', 'nosotros' => '', 'productos' => '');
+		if ($this->session->userdata('login'))
+      	{
+      		$datos['nombres'] = $this->session->userdata('nombres');      		
+      		$datos['apellidos'] = $this->session->userdata('apellidos');
+		    $datos['imagen'] = $this->session->userdata('imagen');
+		    $datos['nombre_usuario'] = $this->session->userdata('nombre_usuario');
+      		$this->load->view('plantillas/nav_salir',$datos);	
+      	} else {
+				$this->load->view('plantillas/nav_ingresar',$datos);
+      	}
 		$this->load->view('paginas/registracion');
 		$this->load->view('plantillas/footer');
 	}
@@ -46,8 +97,17 @@ class Pcgamer extends CI_Controller {
 		$data['title']= 'Quienes Somos';
 		$this->load->view('plantillas/header',$data);
 
-		$datos = array('inicio' => '', 'contacto' => '', 'nosotros' => 'active');
-		$this->load->view('plantillas/nav_ingresar',$datos);
+		$datos = array('inicio' => '', 'contacto' => '', 'nosotros' => 'active', 'productos' => '');
+		if ($this->session->userdata('login'))
+      	{
+      		$datos['nombres'] = $this->session->userdata('nombres');
+      		$datos['apellidos'] = $this->session->userdata('apellidos');
+		    $datos['imagen'] = $this->session->userdata('imagen');
+		    $datos['nombre_usuario'] = $this->session->userdata('nombre_usuario');
+      		$this->load->view('plantillas/nav_salir',$datos);	
+      	} else {
+				$this->load->view('plantillas/nav_ingresar',$datos);
+      	}
 		$this->load->view('paginas/quienes_somos');
 		$this->load->view('plantillas/footer');
 	}
@@ -57,8 +117,17 @@ class Pcgamer extends CI_Controller {
 		$data['title']= 'Comercializacion';
 		$this->load->view('plantillas/header',$data);
 
-		$datos = array('inicio' => '', 'contacto' => '', 'nosotros' => 'active');
-		$this->load->view('plantillas/nav_ingresar',$datos);
+		$datos = array('inicio' => '', 'contacto' => '', 'nosotros' => 'active', 'productos' => '');
+		if ($this->session->userdata('login'))
+      	{
+      		$datos['nombres'] = $this->session->userdata('nombres');
+      		$datos['apellidos'] = $this->session->userdata('apellidos');
+		    $datos['imagen'] = $this->session->userdata('imagen');
+		    $datos['nombre_usuario'] = $this->session->userdata('nombre_usuario');
+      		$this->load->view('plantillas/nav_salir',$datos);	
+      	} else {
+				$this->load->view('plantillas/nav_ingresar',$datos);
+      	}
 		$this->load->view('paginas/comercializacion');
 		$this->load->view('plantillas/footer');
 	}
@@ -68,8 +137,17 @@ class Pcgamer extends CI_Controller {
 		$data['title']= 'Terminos y Condiciones';
 		$this->load->view('plantillas/header',$data);
 
-		$datos = array('inicio' => '', 'contacto' => '', 'nosotros' => 'active');
-		$this->load->view('plantillas/nav_ingresar',$datos);
+		$datos = array('inicio' => '', 'contacto' => '', 'nosotros' => 'active', 'productos' => '');
+		if ($this->session->userdata('login'))
+      	{
+      		$datos['nombres'] = $this->session->userdata('nombres');
+      		$datos['apellidos'] = $this->session->userdata('apellidos');
+		    $datos['imagen'] = $this->session->userdata('imagen');
+		    $datos['nombre_usuario'] = $this->session->userdata('nombre_usuario');
+      		$this->load->view('plantillas/nav_salir',$datos);	
+      	} else {
+				$this->load->view('plantillas/nav_ingresar',$datos);
+      	}
 		$this->load->view('paginas/terminos_y_condiciones');
 		$this->load->view('plantillas/footer');
 	}

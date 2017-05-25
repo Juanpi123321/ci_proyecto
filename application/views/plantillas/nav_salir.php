@@ -14,7 +14,7 @@
 		<div id="barra-navegacion" class="collapse navbar-collapse">
 			<ul class="nav navbar-nav">
 				<li class="<?= $inicio ?>"><a href="<?php echo base_url(); ?>">INICIO</a></li>
-				<li class="active"><a href="<?php echo base_url(); ?>#productos">PRODUCTOS</a></li>
+				<li class="<?= $productos ?>"><a href="<?php echo base_url(); ?>#productos">PRODUCTOS</a></li>
 				<li class="<?= $contacto ?>"><a href="<?php echo base_url(); ?>pcgamer/contacto">CONTACTO</a></li>
 				<li class="dropdown <?= $nosotros ?>">
 					<a data-toggle="dropdown" class="dropdown-toggle" href="<?php echo base_url(); ?>pcgamer/index/#">NOSOTROS<b class="caret"></b></a>
@@ -26,18 +26,25 @@
 				</li>
 			</ul>
 
-			<!-- Boton de sesion -->
+		<!-- Boton de sesion -->
 			<div class="btn-group navbar-right margen-boton-navbar">
-			  <button type="button" class="btn btn-primary btn-circle btn-lg dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i></button> <!-- glyphicon-list -->
+			  <button type="button" class="btn btn-primary btn-circle btn-lg dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i></button>
 			  <ul class="dropdown-menu" style="background: ghostwhite; color: black; text-align: center;">
-			    <li>Email del usuario</li>
-			    <br>
-			    <li>Nombre del usuario</li>
-			    <li role="separator" class="divider"></li>
-			    <a href="<?= $inicio ?>"><a href="<?php echo base_url(); ?>" title=""><button type="button" class="btn btn-default btn-sm navbar-btn" data-toggle="modal" data-target=#Cerrar>Cerrar Sesion</button></a>   <!-- solamente lleva a la pantalla principal, todavi no cierra la sesion -->
+			    <hr style="margin-top: 3px;">
+			    <div class="row">			   	  
+			      <div class="col-md-4">
+					<img src="<?php echo base_url('uploads/img_usuarios/') . $imagen?>" height="50" width="50"/>
+				  </div>
+				  <div class="col-md-2 col-md-offset-2">
+				    <li><b>&nbsp<?= $nombres?>&nbsp<?= $apellidos?>&nbsp</b></li>
+				    <br>
+				    <li>&nbsp<?= $nombre_usuario?>&nbsp</li>
+				   </div>
+				 </div>
+				 	<hr style="margin-top: 10px; margin-bottom: 3px;">
+				    <a href="<?php echo base_url();?>login_controller/cerrar_sesion" title=""><button type="button" class="btn btn-primary btn-sm navbar-btn" data-toggle="modal" data-target=#Cerrar>Cerrar Sesion</button></a>
 			  </ul>
 			</div>
-
 			<!-- Buscador -->
 			<form role="search" class="navbar-form navbar-right" style="border-style: none">
 				<div class="form-group">
