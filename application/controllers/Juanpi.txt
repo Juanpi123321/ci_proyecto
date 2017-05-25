@@ -156,3 +156,51 @@ Para mostrar una lista varias veces(los sabores de la pagina de andrea)
 		echo form_dropdown('categoria', $lista, '0', 'class="form-control"');
 
 ?>
+
+
+
+
+session
+
+public function iniciar_sesion(){
+	$this->form_validation->set_rules('usuario_name', 'Nombre', 'required');
+	$this->form_validation->set_rules('usuario_password', 'Password', 'required'|callback_verificar_password();
+
+
+
+----------------------------------
+//hacer un select con el where	 -
+----------------------------------
+
+
+
+
+verficar_password(){
+	$usuario= $this->input->post('usuario_name');
+	$password= $this->input->post('usuario_password');
+
+	$contraseña= base64_encode($pass);
+
+	$this->load->model('usuario_model');
+
+	$usuario= $this->usuario_model->buscar_usuario($usuario, $contrasena);
+	
+	if($usuario){
+		$persona_id = $usuarios ->id_persona;
+		
+		$datos_usuario = array(
+			'id_usuario'=> $persona->persona_id,
+			'nombre'=> $persona->nombre,
+			'apellido'
+			'perfil'
+			'login' => TRUE
+		);
+		
+		$this->session->set_userdata($datos_usuario);
+		return true;
+
+}
+
+
+//Para mostrar el nombre del usuario
+<?php $this->session->userdata('nombre');?>

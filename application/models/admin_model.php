@@ -81,6 +81,8 @@ public function select_productos(){
     $this->db->select('*');       
     $this->db->from('productos');    
     $this->db->join('categoria', 'categoria.Id_categoria = productos.categoria_id');
+    /*solo mustra los productos activos*/
+    //$this->db->where('estado', "1");       
     $query = $this->db->get();       
     return $query->result();         
   }
@@ -106,7 +108,7 @@ public function select_productos(){
    {                          
       $this->db->select('*');                           
       $this->db->from('productos');                           
-      $this->db->where('Id_producto', $id);                           
+      $this->db->where('Id_producto', $id);                    
       $query = $this->db->get();                           
       return $query->result();    
   }

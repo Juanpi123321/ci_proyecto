@@ -1,49 +1,35 @@
-<?php     
+<?php
 
-class Usuario_model extends CI_Model  
-{     
-	function __construct()     
-	{         
-		parent::__construct();     
-	}
+class Usuario_model extends CI_Model
 
-	/*public function guardar_libro($data){           
-		$this->db->insert('libro', $data);    
-	}   
+{
+    function __construct()
+    {
+        parent::__construct();
+    }
 
-	public function select_categoria(){     
-		$query = $this->db->get('libro_categoria');           
-		return $query->result();    
-	}*/
 
-	public function select_usuarios(){       
-		$this->db->select('*');       
-		$this->db->from('usuarios');  
-		/*$this->db->join('libro_categoria', 'libro_categoria.categoria_id = libro.libro_categoria');*/    
-		$this->db->join('personas', 'personas.Id_persona = usuarios.persona_id');       
-		$query = $this->db->get();       
-		return $query->result();         
-	}   
+public function  buscar_usuario($usuario, $contrasena)
+{
+                          $this->db->select('*');
+                          $this->db->from('usuarios');
+                          $this->db->where('usuario', $usuario);
+                          $this->db->where('contrasena', $contrasena);
+                          $query = $this->db->get();
+			  $resultado = $query->row();
+      			  return $resultado;
+                      }
 
-	/*public function select_libros_id($id)  
-   {                          
-   		$this->db->select('*');                           
-   		$this->db->from('libro');                           
-   		$this->db->where('libro_id', $id);                           
-   		$query = $this->db->get();                           
-   		return $query->result();    
-	}
+public function buscar_persona($Id_persona){
+      
+                          $this->db->select('*');
+                          $this->db->from('personas');
+                          $this->db->where('Id_persona', $Id_persona);
+                          $query = $this->db->get();
+                          $resultado = $query->row();
+      			  return $resultado;
+   }
 
-	public function actualizar_libro($data, $id)  
-   {         
-   		$this->db->where('libro_id', $id);       
-   		$this->db->update('libro', $data);                               
-	}   
 
-	public function eliminar_libro($data, $id)  
-   {                                  
-   		$this->db->where('libro_id', $id);       
-   		$this->db->update('libro', $data);                               
-   	}     */
- 
-} 
+ }
+

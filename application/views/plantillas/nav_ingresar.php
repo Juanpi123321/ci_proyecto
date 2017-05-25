@@ -43,8 +43,14 @@
 			            <form class="form-horizontal" role="form">
 			            	<div class="modal-body">		               
 			                  <div class="form-group col-sm-10">
-			                        <input type="text" class="form-control" placeholder="Usuario" required/>
+			                        <input type="text" class="form-control" placeholder="Usuario" required onclick="javascript:login();"/>
 			                  </div>
+								<script type="text/javascript">
+				                	function login(){
+				                		location.href= "<?php echo base_url(); ?>usuario_controller"
+				                	}
+				                </script>
+
 			                  <div class="form-group col-sm-10">
 			                        <input type="password" class="form-control" placeholder="Contrase&#241a" required/>
 			                  </div>
@@ -58,8 +64,8 @@
 				            </div>            
 				            <!-- Modal Footer -->
 				            <div class="modal-footer form-horizontal">                
-				                <button type="submit" class="btn btn-primary">Iniciar Sesion
-				                </button>
+				                <a href="<?php echo base_url(); ?>usuario_controller"><button type="submit" class="btn btn-primary">Iniciar Sesion
+				                </button></a>
 				                <a href="<?php echo base_url(); ?>pcgamer/registracion"><button type="button" class="btn btn-default" 	data-dismiss="modal" onclick="javascript:registrar();">Registrarse</button>
 				                </a>
 				                <!-- permite dirigir al boton registrar hacia la pag del registro -->
