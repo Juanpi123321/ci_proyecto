@@ -135,6 +135,14 @@ public function insertar_persona()
             redirect('admin_controller/usuarios');    
     }
 
+  public function imagen($id=NULL)  
+    {            
+    $data = array('estado'=> '0');     
+            $this->load->model('admin_model');                   
+            $this->admin_model->estado_usuario($data, $id);                    
+            redirect('admin_controller/usuarios');    
+    }  
+
 	public function activar_usuario($id=NULL)      
 	  {
 		$data = array('estado'=> '1');     
@@ -146,7 +154,7 @@ public function insertar_persona()
     public function editar_usuario($id=NULL)      
     {             
     	$this->load->model('admin_model');             
-    	$usuario = $this->admin_model->select_usuarios_id($id);
+    	$usuario = $this->admin_model->select_usuario_id($id);
       $persona = $this->admin_model->select_persona_id($id);   
     
     	foreach ($usuario as $row) 
@@ -171,6 +179,30 @@ public function insertar_persona()
     		$this->load->view('paginas/usuarios_editar_admin', $data);        
     		$this->load->view('plantillas/footer');      
    	} 
+
+    public function imagen_usuario($id=NULL)      
+    {             
+      $this->load->model('admin_model');  //uso el model para sacar a la persona y al usuario
+      $persona = $this->admin_model->select_persona_id($id);
+      $usuario = $this->admin_model->select_usuario_id($id);
+      /*Saco los datos mediante el foreach y despues los paso a la vista*/
+      foreach ($persona as $row) 
+      {         
+        $data['imagen'] = $row->imagen;
+        $data['nombres'] = $row->nombres;      
+      }
+      foreach ($usuario as $row) 
+      {         
+        $data['usuario'] = $row->usuario;      
+      }      
+
+      $titulo['title']= 'Imagen de Usuarios';
+      $this->load->view('plantillas/header',$titulo);
+      $datos = array('inicio' => '', 'usuarios' => 'active', 'productos' => '');
+      $this->load->view('plantillas/nav_admin',$datos);   
+      $this->load->view('paginas/usuario_imagen_admin', $data);
+      $this->load->view('plantillas/footer');   
+    } 
 
     public function actualizar($id=NULL)      
     {   // VALIDAR LOS DATOS INGRESADOS   

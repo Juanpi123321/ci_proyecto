@@ -42,12 +42,9 @@
 				 					<td><?php  echo $row->apellidos; ?></td>
 				 					<td><?php  echo $row->dni; ?></td>
 				 					<td><?php  echo $row->direccion; ?></td>
-				 					<td><?php  echo $row->descripcion; ?></td>		 					
-				 					<td><a class="btn" href="<?php echo base_url("admin_controller/imagen_usuario/$row->Id_usuario");?>" >
-				 							<img src="<?php echo base_url('uploads/img_usuarios/') . $row->imagen?>" height="100" width="100"/>
-				 						</a>
-				 					</td>
-					                <td>
+				 					<td><?php  echo $row->descripcion; ?></td>
+				 					<td><img src="<?php echo base_url('uploads/img_usuarios/') . $row->imagen?>" height="100" width="100" /></td>
+				 					<td>
 				 						<a class="btn btn-success" href="<?php echo base_url("admin_controller/editar_usuario/$row->Id_usuario");?>" >
 				 							<span class="glyphicon glyphicon-pencil"></span>
 				 						</a>
@@ -74,6 +71,23 @@
 				            </tbody> 
 				    	</table>  
 				    	<br>
+					    <!-- Modal content-->
+					      <div class="modal-content">
+					        <div class="modal-header">
+					          <button type="button" class="close" data-dismiss="modal">&times;</button>
+					          <h4 class="modal-title">Modal Header</h4>
+					        </div>
+					        <div class="modal-body">
+					          <p>Some text in the modal.</p>
+					        </div>
+					        <div class="modal-footer">
+					          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					        </div>
+					      </div>
+
+
+
+
 				    </div> 
 				</div> 
 

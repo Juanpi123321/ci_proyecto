@@ -43,7 +43,7 @@ public function select_rol(){
     return $query->result();    
   }
 
-public function select_usuarios_id($id)  
+public function select_usuario_id($id)  
    {                          
       $this->db->select('*');                           
       $this->db->from('usuarios');                           
