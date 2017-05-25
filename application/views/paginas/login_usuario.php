@@ -23,7 +23,7 @@
 			<!-- formulario de CodeIgniter -->
 			<?php echo validation_errors(); ?> 
 
-			<?php echo form_open('usuario_controller/iniciar_sesion', ['class' => 'form-signin', 'role' => 'form']); ?>				
+			<?php echo form_open('login_controller/iniciar_sesion', ['class' => 'form-signin', 'role' => 'form']); ?>				
 			<div class="col-md-6 col-md-offset-3">  
 				<label class="control-label" for="textinput">Nombre de Usuario:</label>
 				<?php echo form_input(['name' => 'usuario', 'id' => 'usuario' , 'class' => 'form-control', 'required' => 'required','autofocus' => 'autofocus' , 'placeholder' => 'Usuario', 'value' => set_value('usuario')]); ?>

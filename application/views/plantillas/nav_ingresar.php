@@ -47,7 +47,7 @@
 			                  </div>
 								<script type="text/javascript">
 				                	function login(){
-				                		location.href= "<?php echo base_url(); ?>usuario_controller"
+				                		location.href= "<?php echo base_url(); ?>login_controller"
 				                	}
 				                </script>
 
@@ -64,7 +64,7 @@
 				            </div>            
 				            <!-- Modal Footer -->
 				            <div class="modal-footer form-horizontal">                
-				                <a href="<?php echo base_url(); ?>usuario_controller"><button type="submit" class="btn btn-primary">Iniciar Sesion
+				                <a href="<?php echo base_url(); ?>login_controller"><button type="submit" class="btn btn-primary">Iniciar Sesion
 				                </button></a>
 				                <a href="<?php echo base_url(); ?>pcgamer/registracion"><button type="button" class="btn btn-default" 	data-dismiss="modal" onclick="javascript:registrar();">Registrarse</button>
 				                </a>

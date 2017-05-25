@@ -14,6 +14,9 @@ class Admin_controller extends CI_Controller {
 		$this->load->view('plantillas/header',$data);
 
 		$datos = array('inicio' => 'active', 'usuarios' => '', 'productos' => '');
+    $datos['nombres'] = $this->session->userdata('nombres');
+    $datos['imagen'] = $this->session->userdata('imagen');
+    $datos['nombre_usuario'] = $this->session->userdata('nombre_usuario');
 		$this->load->view('plantillas/nav_admin',$datos);
 		$this->load->view('paginas/index_admin');
 		$this->load->view('plantillas/footer');
@@ -25,6 +28,9 @@ class Admin_controller extends CI_Controller {
 		$this->load->view('plantillas/header',$data);
 
 		$datos = array('inicio' => '', 'usuarios' => 'active', 'productos' => '');
+    $datos['nombres'] = $this->session->userdata('nombres');
+    $datos['imagen'] = $this->session->userdata('imagen');
+    $datos['nombre_usuario'] = $this->session->userdata('nombre_usuario');
 		$this->load->view('plantillas/nav_admin',$datos);
 
 		$this->load->model('admin_model');
@@ -39,6 +45,9 @@ class Admin_controller extends CI_Controller {
 		$this->load->view('plantillas/header',$data);
 
 		$datos = array('inicio' => '', 'usuarios' => 'active', 'productos' => '');
+    $datos['nombres'] = $this->session->userdata('nombres');
+    $datos['imagen'] = $this->session->userdata('imagen');
+    $datos['nombre_usuario'] = $this->session->userdata('nombre_usuario');
 		$this->load->view('plantillas/nav_admin',$datos);
 		$this->load->view('paginas/registracion_admin');
 		$this->load->view('plantillas/footer');
@@ -175,6 +184,9 @@ public function insertar_persona()
     		$titulo['title']= 'Usuarios';
   			$this->load->view('plantillas/header',$titulo);
   			$datos = array('inicio' => '', 'usuarios' => 'active', 'productos' => '');
+        $datos['nombres'] = $this->session->userdata('nombres');
+        $datos['imagen'] = $this->session->userdata('imagen');
+        $datos['nombre_usuario'] = $this->session->userdata('nombre_usuario');
   			$this->load->view('plantillas/nav_admin',$datos);      
     		$this->load->view('paginas/usuarios_editar_admin', $data);        
     		$this->load->view('plantillas/footer');      
@@ -196,9 +208,12 @@ public function insertar_persona()
         $data['usuario'] = $row->usuario;      
       }      
 
-      $titulo['title']= 'Imagen de Usuarios';
+      $titulo['title']= 'Imagen de Usuario';
       $this->load->view('plantillas/header',$titulo);
       $datos = array('inicio' => '', 'usuarios' => 'active', 'productos' => '');
+      $datos['nombres'] = $this->session->userdata('nombres');
+      $datos['imagen'] = $this->session->userdata('imagen');
+      $datos['nombre_usuario'] = $this->session->userdata('nombre_usuario');
       $this->load->view('plantillas/nav_admin',$datos);   
       $this->load->view('paginas/usuario_imagen_admin', $data);
       $this->load->view('plantillas/footer');   
@@ -230,6 +245,9 @@ public function insertar_persona()
 		$this->load->view('plantillas/header',$data);
 
 		$datos = array('inicio' => '', 'usuarios' => '', 'productos' => 'active');
+    $datos['nombres'] = $this->session->userdata('nombres');
+    $datos['imagen'] = $this->session->userdata('imagen');
+    $datos['nombre_usuario'] = $this->session->userdata('nombre_usuario');
 		$this->load->view('plantillas/nav_admin',$datos);
     
     $this->load->model('admin_model');
@@ -260,6 +278,9 @@ public function insertar_persona()
     $this->load->view('plantillas/header',$data);
 
     $datos = array('inicio' => '', 'usuarios' => '', 'productos' => 'active');
+    $datos['nombres'] = $this->session->userdata('nombres');
+    $datos['imagen'] = $this->session->userdata('imagen');
+    $datos['nombre_usuario'] = $this->session->userdata('nombre_usuario');
     $this->load->view('plantillas/nav_admin',$datos);
     $this->load->view('paginas/productos_agregar_admin');
     $this->load->view('plantillas/footer');
@@ -357,6 +378,9 @@ $this->form_validation->set_message('required', 'El campo %s es obligatorio');
         $titulo['title']= 'Productos';
         $this->load->view('plantillas/header',$titulo);
         $datos = array('inicio' => '', 'usuarios' => '', 'productos' => 'active');
+        $datos['nombres'] = $this->session->userdata('nombres');
+        $datos['imagen'] = $this->session->userdata('imagen');
+        $datos['nombre_usuario'] = $this->session->userdata('nombre_usuario');
         $this->load->view('plantillas/nav_admin',$datos);      
         $this->load->view('paginas/productos_editar_admin', $data);        
         $this->load->view('plantillas/footer');      

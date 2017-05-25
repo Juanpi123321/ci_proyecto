@@ -1,7 +1,7 @@
 ﻿
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Usuario_controller extends CI_Controller {
+class Login_controller extends CI_Controller {
 
 
 		function __construct()
@@ -20,23 +20,7 @@ class Usuario_controller extends CI_Controller {
     $this->load->view('plantillas/footer');
   }
 
-/*
- public function iniciar_sesion() {
-    
-    $this->form_validation->set_rules('usuario_name', 'Nombre', 'required');
-        $this->form_validation->set_rules('usuario_password', 'Password', 'required|callback_verificar_password');
-    
-	if ($this->form_validation->run() == FALSE) {
-
-                $this->login();
-
-        } else {
-
-        	$this->usuario_logueado();     
-
-                }
-}*/
-  
+ 
   public function iniciar_sesion() {
     
     $this->form_validation->set_rules('usuario', 'Nombre', 'required');
@@ -45,7 +29,6 @@ class Usuario_controller extends CI_Controller {
   if ($this->form_validation->run() == FALSE) {
                 $this->index();
         } else {
-          /*redirect('persona_controller');*/
           $this->usuario_logueado();
         }
   }
@@ -63,6 +46,9 @@ class Usuario_controller extends CI_Controller {
                  $persona = $this->usuario_model->buscar_persona($persona_id);
                  $datos_usuario = array(
                    'Id_usuario' => $usuario->Id_usuario,
+                   'nombre_usuario' => $usuario->usuario,
+                   'email' => $persona->email,
+                   'imagen' => $persona->imagen,
                    'nombres' => $persona->nombres,
                    'apellidos' => $persona->apellidos,
                    'rol' =>$persona->rol_id,
@@ -75,54 +61,6 @@ class Usuario_controller extends CI_Controller {
                 return false;
          }
     }
-
-
- /*     function verificar_password($password)
-	{
-	// verifica que el usuario exista
-         $usuario = $this->input->post('usuario_name');
-         $pass = $this->input->post('usuario_password');
-         $contrasenia = base64_encode($pass);
-         
-         $this->load->model('usuario_model');
-         $usuario = $this->usuario_model->buscar_usuario($usuario, $contrasenia);
-         if ($usuario) {
-                 $persona_id = $usuario ->id_persona;
-                 $persona = $this->usuario_model->buscar_persona($persona_id);
-                 $datos_usuario = array(
-                   'id_usuario' => $persona->id_persona,
-                   'nombre' => $persona->nombre,
-                   'apellido' => $persona->apellido,
-                   'perfil' => $persona->perfil_id,
-                   'login' => TRUE
-                );
-                   	$this->session->set_userdata($datos_usuario);
-			return true;                            
-         } else {
-               $this->form_validation->set_message('verificar_password', 'Usuario o contraseña invalidos');
-                return false;
-         }
-    }*/
-
-
-
-  /*public function usuario_logueado() {
-      if ($this->session->userdata('login')){
-         $data = array();
-         $perfil_usuario = $this->session->userdata('perfil');
-         //SE VERIFICA EL PERFIL DEL USUARIO PARA REDIRECCIONAR A LA PAGINA CORRESPONDIENTE
-			switch ($this->session->userdata('perfil')) {			
-			case '1':
-				redirect('libro_controler');
-				break;				
-			case '2':
-				redirect('proyecto');
-				break;	
-			}      
-       }else{        
-            $this->login_sesion();
-      }
-   }*/
 
    public function usuario_logueado() {
       if ($this->session->userdata('login'))
@@ -149,14 +87,11 @@ class Usuario_controller extends CI_Controller {
       }
    }
 
-
- /*public function cerrar_sesion() {
+ public function cerrar_sesion() {
           
       $this->session->sess_destroy();
     
-      $this->iniciar_sesion();
-   }*/
-
-
+      redirect('pcgamer');
+   }
 
 }
