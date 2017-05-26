@@ -71,11 +71,17 @@ nav.navbar-admin{
 .navbar-default .navbar-nav .open .dropdown-menu > li > a{
 	background: black;
 	color: ghostwhite;
-	padding: 8px 10px;
+    padding: 8px 10px;
 }
 /*xq quedaba muy al borde*/
 .margen-boton-navbar{
 	margin-right: 1%;
+}
+/*mas ancha el dropdown de sesion*/
+.navbar-right .dropdown-menu {
+    right: 0px;
+    left: auto;
+    width: 250px;
 }
 /*color del boton Ingresar cuando le haces click, hover, cuando tenes apretado, etc*/
 .btn-primary, .btn-primary:focus, .btn-primary.focus, .btn-primary.active:focus, .btn-primary:active:focus,

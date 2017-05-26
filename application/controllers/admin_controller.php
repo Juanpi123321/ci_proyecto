@@ -14,14 +14,22 @@ class Admin_controller extends CI_Controller {
 		$this->load->view('plantillas/header',$data);
 
 		$datos = array('inicio' => 'active', 'usuarios' => '', 'productos' => '');
-    $datos['nombres'] = $this->session->userdata('nombres');
-    $datos['apellidos'] = $this->session->userdata('apellidos');
-    $datos['imagen'] = $this->session->userdata('imagen');
-    $datos['nombre_usuario'] = $this->session->userdata('nombre_usuario');
-		$this->load->view('plantillas/nav_admin',$datos);
+    /*verifica que sea el administrador sino lo reenvia a otra pagina*/
+    $this->verificar_admin($datos);
 		$this->load->view('paginas/index_admin');
 		$this->load->view('plantillas/footer');
 	}
+
+  public function acceso_noautorizado()
+  {
+    $data['title']= 'Acceso No Autorizado';
+    $this->load->view('plantillas/header',$data);
+    $datos = array('inicio' => '', 'productos' => '', 'contacto' => '', 'nosotros' => '');
+    /*elige el navbar de acuerdo si esta logueado o no*/
+    $this->seleccionar_nav($datos);
+    $this->load->view('paginas/acceso_noautorizado');
+    $this->load->view('plantillas/footer');
+  }
 
 	public function usuarios()
 	{
@@ -29,11 +37,7 @@ class Admin_controller extends CI_Controller {
 		$this->load->view('plantillas/header',$data);
 
 		$datos = array('inicio' => '', 'usuarios' => 'active', 'productos' => '');
-    $datos['nombres'] = $this->session->userdata('nombres');
-    $datos['apellidos'] = $this->session->userdata('apellidos');
-    $datos['imagen'] = $this->session->userdata('imagen');
-    $datos['nombre_usuario'] = $this->session->userdata('nombre_usuario');
-		$this->load->view('plantillas/nav_admin',$datos);
+    $this->verificar_admin($datos);
 
 		$this->load->model('admin_model');
 		$data['usuarios'] = $this->admin_model->select_usuarios();
@@ -47,11 +51,7 @@ class Admin_controller extends CI_Controller {
 		$this->load->view('plantillas/header',$data);
 
 		$datos = array('inicio' => '', 'usuarios' => 'active', 'productos' => '');
-    $datos['nombres'] = $this->session->userdata('nombres');
-    $datos['apellidos'] = $this->session->userdata('apellidos');
-    $datos['imagen'] = $this->session->userdata('imagen');
-    $datos['nombre_usuario'] = $this->session->userdata('nombre_usuario');
-		$this->load->view('plantillas/nav_admin',$datos);
+    $this->verificar_admin($datos);
 		$this->load->view('paginas/registracion_admin');
 		$this->load->view('plantillas/footer');
 	}
@@ -187,11 +187,7 @@ public function insertar_persona()
     		$titulo['title']= 'Usuarios';
   			$this->load->view('plantillas/header',$titulo);
   			$datos = array('inicio' => '', 'usuarios' => 'active', 'productos' => '');
-        $datos['nombres'] = $this->session->userdata('nombres');
-        $datos['apellidos'] = $this->session->userdata('apellidos');
-        $datos['imagen'] = $this->session->userdata('imagen');
-        $datos['nombre_usuario'] = $this->session->userdata('nombre_usuario');
-  			$this->load->view('plantillas/nav_admin',$datos);      
+        $this->verificar_admin($datos);    
     		$this->load->view('paginas/usuarios_editar_admin', $data);        
     		$this->load->view('plantillas/footer');      
    	} 
@@ -215,11 +211,7 @@ public function insertar_persona()
       $titulo['title']= 'Imagen de Usuario';
       $this->load->view('plantillas/header',$titulo);
       $datos = array('inicio' => '', 'usuarios' => 'active', 'productos' => '');
-      $datos['nombres'] = $this->session->userdata('nombres');
-      $datos['apellidos'] = $this->session->userdata('apellidos');
-      $datos['imagen'] = $this->session->userdata('imagen');
-      $datos['nombre_usuario'] = $this->session->userdata('nombre_usuario');
-      $this->load->view('plantillas/nav_admin',$datos);   
+      $this->verificar_admin($datos);
       $this->load->view('paginas/usuario_imagen_admin', $data);
       $this->load->view('plantillas/footer');   
     } 
@@ -250,11 +242,7 @@ public function insertar_persona()
 		$this->load->view('plantillas/header',$data);
 
 		$datos = array('inicio' => '', 'usuarios' => '', 'productos' => 'active');
-    $datos['nombres'] = $this->session->userdata('nombres');
-    $datos['apellidos'] = $this->session->userdata('apellidos');
-    $datos['imagen'] = $this->session->userdata('imagen');
-    $datos['nombre_usuario'] = $this->session->userdata('nombre_usuario');
-		$this->load->view('plantillas/nav_admin',$datos);
+    $this->verificar_admin($datos);
     
     $this->load->model('admin_model');
     $data['productos'] = $this->admin_model->select_productos();
@@ -284,11 +272,7 @@ public function insertar_persona()
     $this->load->view('plantillas/header',$data);
 
     $datos = array('inicio' => '', 'usuarios' => '', 'productos' => 'active');
-    $datos['nombres'] = $this->session->userdata('nombres');
-    $datos['apellidos'] = $this->session->userdata('apellidos');
-    $datos['imagen'] = $this->session->userdata('imagen');
-    $datos['nombre_usuario'] = $this->session->userdata('nombre_usuario');
-    $this->load->view('plantillas/nav_admin',$datos);
+    $this->verificar_admin($datos);
     $this->load->view('paginas/productos_agregar_admin');
     $this->load->view('plantillas/footer');
   }
@@ -385,13 +369,38 @@ $this->form_validation->set_message('required', 'El campo %s es obligatorio');
         $titulo['title']= 'Productos';
         $this->load->view('plantillas/header',$titulo);
         $datos = array('inicio' => '', 'usuarios' => '', 'productos' => 'active');
-        $datos['nombres'] = $this->session->userdata('nombres');
-        $datos['apellidos'] = $this->session->userdata('apellidos');
-        $datos['imagen'] = $this->session->userdata('imagen');
-        $datos['nombre_usuario'] = $this->session->userdata('nombre_usuario');
-        $this->load->view('plantillas/nav_admin',$datos);      
+        $this->verificar_admin($datos);     
         $this->load->view('paginas/productos_editar_admin', $data);        
         $this->load->view('plantillas/footer');      
     }
 
+    function verificar_admin($datos)
+  {
+    if ($this->session->userdata('login') and ($this->session->userdata('rol')=='1'))
+        {
+          $datos['nombres'] = $this->session->userdata('nombres');
+          $datos['apellidos'] = $this->session->userdata('apellidos');
+          $datos['imagen'] = $this->session->userdata('imagen');
+          $datos['nombre_usuario'] = $this->session->userdata('nombre_usuario');
+          
+          return $this->load->view('plantillas/nav_admin',$datos);  
+        } else {
+              redirect('admin_controller/acceso_noautorizado');
+        }
+  }
+
+  function seleccionar_nav($datos)
+  {
+    if ($this->session->userdata('login'))
+        {
+          $datos['nombres'] = $this->session->userdata('nombres');
+          $datos['apellidos'] = $this->session->userdata('apellidos');
+        $datos['imagen'] = $this->session->userdata('imagen');
+        $datos['nombre_usuario'] = $this->session->userdata('nombre_usuario');
+          
+          return $this->load->view('plantillas/nav_salir',$datos);  
+        } else {
+        return $this->load->view('plantillas/nav_ingresar',$datos);
+        }
+  }
 }

@@ -13,9 +13,9 @@
 		</div>		
 		<div id="barra-navegacion" class="collapse navbar-collapse">
 			<ul class="nav navbar-nav">
-				<li class="<?= $inicio ?>"><a href="<?php echo base_url(); ?>/admin_controller">ADMINISTRADOR</a></li>
-				<li class="<?= $usuarios ?>"><a href="<?php echo base_url(); ?>/admin_controller/usuarios">USUARIOS</a></li>
-				<li class="<?= $productos ?>"><a href="<?php echo base_url(); ?>/admin_controller/productos">PRODUCTOS</a></li>				
+				<li class="<?= $inicio ?>"><a href="<?php echo base_url(); ?>admin_controller">ADMINISTRADOR</a></li>
+				<li class="<?= $usuarios ?>"><a href="<?php echo base_url(); ?>admin_controller/usuarios">USUARIOS</a></li>
+				<li class="<?= $productos ?>"><a href="<?php echo base_url(); ?>admin_controller/productos">PRODUCTOS</a></li>				
 			</ul>
 
 			<!-- Boton de sesion -->
@@ -27,7 +27,7 @@
 			      <div class="col-md-4">
 					<img src="<?php echo base_url('uploads/img_usuarios/') . $imagen?>" height="50" width="50"/>
 				  </div>
-				  <div class="col-md-2 col-md-offset-2">
+				  <div class="col-md-6">
 				    <li><b>&nbsp<?= $nombres?>&nbsp<?= $apellidos?>&nbsp</b></li>
 				    <br>
 				    <li>&nbsp<?= $nombre_usuario?>&nbsp</li>

@@ -16,6 +16,7 @@ public function index()
     $this->load->view('plantillas/header',$data);
 
     $datos = array('inicio' => '', 'contacto' => '', 'nosotros' => '', 'productos' => '');
+    /*aca no le puse el "seleccionar_nav" xq esta en el otro controlador*/
     if ($this->session->userdata('login'))
         {
           $datos['nombres'] = $this->session->userdata('nombres');
