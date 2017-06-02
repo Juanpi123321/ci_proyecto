@@ -204,3 +204,137 @@ verficar_password(){
 
 //Para mostrar el nombre del usuario
 <?php $this->session->userdata('nombre');?>
+
+
+
+
+
+Carrito
+
+$data = array(
+        'id'      => 'sku_123ABC',
+        'qty'     => 1,
+        'price'   => 39.95,
+        'name'    => 'T-Shirt',
+        'options' => array('Size' => 'L', 'Color' => 'Red')
+);
+
+$this->cart->insert($data);
+
+
+
+Displaying the Cart (para mostrar el carrito)
+
+Updating the Cart
+
+$data = array(
+        'rowid' => 'b99ccdf16028f015540f341130b6d8ec',
+        'qty'   => 3
+);
+
+$this->cart->update($data);
+
+
+
+
+en el foreach de listar productos
+<td>
+<?php if($this->session->userdata('login')){
+	echo form_open('carrito_controler/agregar');
+	echo form_hidden('id',$row->libro_id);
+	echo form_hidden('titulo',$row->libro_titulo);
+	echo form_hidden('precio',$row->libro_precio);
+	echo form_submit(comprar', 'Agregar',"class='btn btn-success'");
+	echo form_close();
+	
+	} ?>
+</td>
+
+
+//Me dice si el carrito tiene algo, en este caso dice si esta vacio
+if(!$this->cart->contents()){
+
+agregar()
+	$data= array(
+		'id' => $this->input->post('id').
+		'name' => $this->input->post('titulo').
+		'price' => $this->input->post('precio').
+		'qty' => 1
+		);
+		$this->cart->insert($data);
+		redirect('carrito_controler');
+}
+
+
+
+
+vista	tabla del carrito
+<table adasdasdm
+	<?php	if($cart = $this->cart->contents()): ?>
+	<thead>
+		<td>N° item
+			...
+	</thead>
+</tbody>
+
+	<?php
+	$i=1;
+	foreach ($cart as $item):?>
+	<tr>
+		<td> <?php echo $i++; ?> </td>
+		<td> <?php echo $item['name']; ?> </td>
+		
+
+
+//para eliminar
+	<?php echo anchor('carrito_controler/borrar/'.$item['rowid'],'Eliminar');
+	
+
+
+onclick=limpiar_carrito()
+<script>
+function limpiar_carrito(){
+	var result = confirm('Desea vaciar el carrito?');
+	if(result){
+		window.location = "<?php echo base_url(); ?>carrito_controler/borrar/all";
+	}else{
+		return false; //cierra nomas
+	}
+</script>
+
+
+
+carrito_controler
+function borrar ($rowid){
+	if($rowid=="all"){
+		$this->cart->destroy();
+	}else{
+		$data = array(
+			'rowid' => $rowid,
+			'qty'	=> 0
+		)
+			$this->cart->update($data);
+	}
+	redirect('carrito_controler');
+}
+
+
+PEDIDO
+$pedido = array(
+	'date'	=> date('Y-m-d'),
+	'idCliente' => xxxx
+	);
+
+if ($cart = $this->cart->contents()):
+	foreach ($cart as $item):
+		$detalle_pedido = array(
+			'id_pedido' => xxxxxxx,		//va a ser autoincrental
+			'id_producto' => $item['id'],
+			'cantidad'	=> $item['qty'],
+			'precio'	=> $item['price']
+		);
+
+		llamar al modelo - insertar el pedido
+	endforeach;
+endif;
+}

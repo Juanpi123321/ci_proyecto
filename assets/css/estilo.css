@@ -26,6 +26,10 @@
   margin-left: auto;
   margin-right: auto;
 }
+.margen-comprar{
+    margin-left: 110px;
+    margin-top: -40px;
+}
 .navbar-logo {
   height: 50px;
   padding: 10px 10px; 

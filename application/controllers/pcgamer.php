@@ -28,7 +28,10 @@ class Pcgamer extends CI_Controller {
 
     $datos = array('inicio' => '', 'contacto' => '', 'nosotros' => '', 'productos' => 'active');
     $this->seleccionar_nav($datos);
-    $this->load->view('paginas/productos');
+
+    $this->load->model('admin_model');
+    $productos['productos'] = $this->admin_model->select_productos();
+    $this->load->view('paginas/productos', $productos);
     $this->load->view('plantillas/footer');
    
 }

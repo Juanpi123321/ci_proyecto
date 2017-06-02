@@ -13,7 +13,7 @@
 		<div id="barra-navegacion" class="collapse navbar-collapse">
 			<ul class="nav navbar-nav">
 				<li class="<?= $inicio ?>"><a href="<?php echo base_url(); ?>">INICIO</a></li>
-				<li class="<?= $productos ?>"><a href="<?php echo base_url(); ?>#productos">PRODUCTOS</a></li>
+				<li class="<?= $productos ?>"><a href="<?php echo base_url(); ?>pcgamer/productos">PRODUCTOS</a></li>
 				<li class="<?= $contacto ?>"><a href="<?php echo base_url(); ?>pcgamer/contacto">CONTACTO</a></li>
 				<li class="dropdown <?= $nosotros ?>">
 					<a data-toggle="dropdown" class="dropdown-toggle" href="<?php echo base_url(); ?>pcgamer/index/#">NOSOTROS<b class="caret"></b></a>
