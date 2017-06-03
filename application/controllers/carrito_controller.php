@@ -14,7 +14,7 @@ class Carrito_controller extends CI_Controller {
     $data['title']= 'Carrito de Compras';
     $this->load->view('plantillas/header',$data);
 
-    $datos = array('inicio' => 'active', 'contacto' => '', 'nosotros' => '', 'productos' => '');
+    $datos = array('inicio' => '', 'contacto' => '', 'nosotros' => '', 'productos' => '');
     /*aca no le puse el "seleccionar_nav" xq esta en el otro controlador*/
     if ($this->session->userdata('login'))
         {
@@ -37,6 +37,30 @@ class Carrito_controller extends CI_Controller {
     $this->load->view('plantillas/footer');
   }
 
+public function agregar_carrito() 
+{         //primero vamos a probar que agregue de a uno
+           $data = array( 
+                  'id' => $this->input->post('id'), 
+                  'name' => $this->input->post('nombre'), 
+                  'price'=> $this->input->post('precio'), 
+                  'qty' => $this->input->post('cantidad')  //1
+                );   
+                $this->cart->insert($data); 
+ redirect('carrito_controller'); 
+}  
  
+function borrar ($id) { 
+    if ($id=="all"){ 
+      $this->cart->destroy(); 
+    }else{ 
+      $data = array( 
+              'rowid'   => $id, 
+              'qty'     => 0 
+    ); 
+      $this->cart->update($data); 
+    } 
+    
+    redirect('carrito_controller'); 
+ }  
 
 }

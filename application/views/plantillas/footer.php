@@ -10,5 +10,7 @@
 	</footer>
 	<script src="<?php echo base_url(); ?>assets/BS/js/jquery-3.2.0.min.js"></script>
 	<script src="<?php echo base_url(); ?>assets/BS/js/bootstrap.js"></script>
+	<!-- es un script para que funcione el tooltip y el popover-->
+	<script src="<?php echo base_url(); ?>assets/BS/js/main.js"></script>
 </body>
 </html>
