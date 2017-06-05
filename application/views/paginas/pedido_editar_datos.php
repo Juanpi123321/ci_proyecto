@@ -1,31 +1,21 @@
 
-<!-- Principal Registracion -->
+<!-- principal -->
 <div class="container-fluid fondo-principal">
-	<div class="container fondo-1">
+	<div class="container fondo-2">
 		<div class="row">
 			<br>
 			<div class="titulo text-center">
-				<h2>MODIFICAR DATOS DE USUARIO</h2>
-			</div>
-		</div>
-		<br>
-		<div class="row">
-			<div class="col-center col-xs-6 col-sm-6 col-md-4">
-				<img src="<?php echo base_url(); ?>assets/img/config.png" class="img-responsive">
-			</div>
-		</div>
-		<br>
-		<div class="row">
-			<h4 class="text-center">Editar usuario</h4>
+				<h2>DATOS DEL USUARIO</h2>
+			</div>		
 			<br>
-			<!-- formulario de CodeIgniter -->
-			<?php echo validation_errors(); ?>
+			<h3 class="text-center">Complete los campos que esten erroneos</h3>
+			<br><br>
 
-			<?php echo form_open("admin_controller/actualizar/$Id_usuario", ['class' => 'form-signin', 'role' => 'form']); ?>
+			<?php echo form_open("pedido_controller/actualizar/$Id_usuario", ['class' => 'form-signin', 'role' => 'form']); ?>
 				<div class="col-md-8 col-md-offset-2">				  
-					<label class="control-label" for="textinput">Nombre de Usuario:</label>
-					<?php echo form_input(['name' => 'usuario', 'id' => 'usuario' , 'class' => 'form-control', 'required' => 'required','autofocus' => 'autofocus', 'value' => "$usuario"]); ?>
-					<br>
+					<label class="control-label" for="textinput">Nombre de Usuario: "<?= $nombre_usuario?>"</label>
+					
+					<br><br>
 					<label class="control-label" for="textinput">E-mail:</label>
 					<?php echo form_input(['name' => 'email', 'id' => 'email' , 'class' => 'form-control', 'required' => 'required','type' => 'email', 'value' => "$email"]); ?>	
 					<br>
@@ -42,12 +32,15 @@
 					<?php echo form_input(['name' => 'direccion', 'id' => 'direccion' , 'class' => 'form-control', 'type' => 'text', 'value' => "$direccion"]); ?>
 					<br><br>
 
-					  <a href="<?php echo base_url(); ?>admin_controller/usuarios"><button type="button" class="btn btn-default">Volver atras</button></a>
-					  <?php echo form_submit('Editar Usuario','Editar Usuario',"class='btn btn-primary'"); ?>
+					  <a href="<?php echo base_url(); ?>pedido_controller"><button type="button" class="btn btn-default">Volver atras</button></a>
+					  <?php echo form_submit('Editar Datos','Editar Datos',"class='btn btn-primary'"); ?>
 				</div>
 			<?php echo form_close();?>	<!-- Cierro el formulario -->
-		</div>
-		<br><br>
-	  </div>
+
+			<br><br>
+		</div>		
+			<br>
+			<br>
+			<br>
 	</div>
 </div>

@@ -29,7 +29,7 @@ class Carrito_controller extends CI_Controller {
 
     /*verifica si el carrito posee articulos*/
     if (!$this->cart->contents()){ 
-       $data['message'] = 'El carrito está vacío!'; 
+       $data['message'] = 'El carrito de compras está vacío!'; 
       }else{ 
        $data['message'] = ''; 
       } 
@@ -62,5 +62,9 @@ function borrar ($id) {
     
     redirect('carrito_controller'); 
  }  
+
+ public function realizar_pedido(){  
+  redirect('pedido_controller');
+ }
 
 }

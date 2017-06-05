@@ -59,6 +59,8 @@ class Login_controller extends CI_Controller {
                    'Id_usuario' => $usuario->Id_usuario,
                    'nombre_usuario' => $usuario->usuario,
                    'email' => $persona->email,
+                   'direccion' => $persona->direccion,  //los voy a ocupar cuando verifique la compra
+                   'dni' => $persona->dni,  //los voy a ocupar cuando verifique la compra
                    'imagen' => $persona->imagen,
                    'nombres' => $persona->nombres,
                    'apellidos' => $persona->apellidos,

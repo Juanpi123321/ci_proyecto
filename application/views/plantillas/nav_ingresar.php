@@ -80,11 +80,11 @@
 			    </div>
 			</div>
 			<!-- Buscador -->
-			<form role="search" class="navbar-form navbar-right" style="border-style: none">
+			<!-- <form role="search" class="navbar-form navbar-right" style="border-style: none">
 				<div class="form-group">
 					<input type="text" placeholder="Buscar" class="form-control">
 				</div>
 				<span class="btn btn-default glyphicon glyphicon-search hidden-xs hidde-sm"></span>	
-			</form>		
+			</form>	 -->	
 		</div>	
 	</nav>

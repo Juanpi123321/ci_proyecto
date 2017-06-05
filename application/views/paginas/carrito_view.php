@@ -1,4 +1,4 @@
-<!-- <!-- 
+
 	<!-- principal -->
 	<div class="container-fluid fondo-principal">
 		<div class="container fondo-2">
@@ -8,9 +8,14 @@
 					<h2>CARRITO DE COMPRAS</h2>
 				</div>		
 				<br> 
-				<a href="<?php echo base_url('pcgamer/productos'); ?>"><button style="float: right; margin-right: 10px;"  class="btn btn-default">Volver atrás</button></a>
+				<a href="<?php echo base_url('pcgamer/productos'); ?>"><button style="float: right; margin-right: 10px;"  class="btn btn-primary">Volver atrás</button></a>
 				<br><br>
-				<h2 class="text-center"><?php echo $message ?></h2>  
+				<?php if (!$this->cart->contents()){  ?>
+			       <img style="width: 40%; margin-left: 30%;" src="<?php echo base_url();?>assets/img/carrito.gif">
+			    <?php } ?>
+				
+				<h1 class="text-center"><?php echo $message ?></h1>  
+				
 				<table id="mytable" class="table table-bordred table-striped">  
 					<?php if ($cart = $this->cart->contents()): ?>   
 						<thead>    
@@ -34,8 +39,8 @@
 							<?php endforeach; ?>   
 							<tr>     
 								<td>Total Compra:$<?php echo number_format($this->cart->total(),2); ?></td>
-								<td><button type="button" class="btn btn-success" onclick="limpiar_carito()">Vaciar carrito</button></td>        
-								<td><a href="<?php echo base_url('carrito_controller/realizar_pedido'); ?>" class="btn btn-success" role="button">Ordenar compra</a></td>  
+								<td><button type="button" class="btn btn-default" onclick="limpiar_carito()">Vaciar carrito</button></td>        
+								<td><a href="<?php echo base_url('carrito_controller/realizar_pedido'); ?>" class="btn btn-primary" role="button">Ordenar compra</a></td>  
 								<td></td>
 								<td></td>
 								<td></td>														  
