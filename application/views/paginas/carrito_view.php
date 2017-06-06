@@ -57,7 +57,7 @@
 						}else{   
 							return false; // cancela al acción  
 						} 
-					}  
+					}
 				</script> 
 
 

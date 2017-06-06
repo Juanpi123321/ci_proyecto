@@ -7,8 +7,9 @@ class Producto_model extends CI_Model
       $this->db->select('*');                           
       $this->db->from('productos');                           
       $this->db->where('Id_producto', $id);                    
-      $query = $this->db->get();                           
-      return $query->result();    
+      $query = $this->db->get();
+      $resultado = $query->row();
+      return $resultado;  
   }
 }
 
