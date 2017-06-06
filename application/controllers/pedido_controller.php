@@ -95,8 +95,33 @@ class Pedido_controller extends CI_Controller {
     $this->load->view('plantillas/footer');
   }
 
- public function guardar_pedido()  
- {   
+  public function forma_pago()
+  {
+    if ($this->input->post('forma_pago') == '0')
+    {
+            $this->form_validation->set_message('forma_pago', '*Debe ingresar una forma de pago');
+            return FALSE;
+    }
+    else
+    {
+            return TRUE;
+    }
+  }
+
+ public function verificar_pedido()  
+ {  //verifica que haya seleccionado una forma pago 
+    $this->form_validation->set_rules('opciones', 'Opciones de pago', 'callback_forma_pago');
+
+    if ($this->form_validation->run() == FALSE) {
+
+          $this->index();
+
+        } else {
+          $this->guardar_pedido();
+            
+        }         
+          
+  public function guardar_pedido(){
     $orden_pedido = array(    
         'cliente_id'  => $this->session->userdata('Id_usuario'),    
         'fechayhora'  => date('Y-m-d H:i:s'),

@@ -32,7 +32,8 @@
 		<div class="row">
 			<div class="col-md-6 col-md-offset-3 col-sm-offset-2 col-xs-offset-1">
 				<br>
-				<?php echo form_open('pedido_controller/guardar_pedido') ;?>
+				<?php echo validation_errors(); ?>
+				<?php echo form_open('pedido_controller/verificar_pedido') ;?>
 					<label class="control-label">Forma de pago:&nbsp</label>
 					<?php $opciones = array(
 					        '0'         => 'Seleccione una opcion',
@@ -44,6 +45,8 @@
 							);
 					echo form_dropdown('forma_pago', $opciones, '0');	?>
 					<br><br>
+					<!-- muestra el error -->
+					<span class="text-danger"><?php echo form_error('forma_pago'); ?></span>
 					<img style="margin-left: 25%;" src="<?php echo base_url();?>assets/img/sello-garantia.png">
 					<br>
 					<p class="text-center">Todas sus compras en Pc-Gamer son seguras</p>

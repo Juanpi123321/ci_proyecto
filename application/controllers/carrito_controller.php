@@ -38,12 +38,12 @@ class Carrito_controller extends CI_Controller {
   }
 
 public function agregar_carrito() 
-{         //primero vamos a probar que agregue de a uno
+{        
            $data = array( 
                   'id' => $this->input->post('id'), 
                   'name' => $this->input->post('nombre'), 
                   'price'=> $this->input->post('precio'), 
-                  'qty' => $this->input->post('cantidad')  //1
+                  'qty' => $this->input->post('cantidad') 
                 );   
                 $this->cart->insert($data); 
  redirect('carrito_controller'); 
