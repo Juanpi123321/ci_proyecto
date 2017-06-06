@@ -120,7 +120,7 @@ class Pedido_controller extends CI_Controller {
           $this->guardar_pedido();
             
         }
-}         
+ }         
           
   public function guardar_pedido(){
     $orden_pedido = array(    
@@ -139,13 +139,42 @@ class Pedido_controller extends CI_Controller {
                   'cantidad' => $item['qty'],     
                   'precio_unit'  => $item['price']     
                   );                                                   
-            $this->pedido_model->guardar_factura_detalle($detalle_pedido);     
+            $this->pedido_model->guardar_factura_detalle($detalle_pedido);
+            
+            //actualizar el stock
+            $this->actualizar_stock($detalle_pedido);
+
           endforeach;   
         endif;      
         $this->cart->destroy();  
-        // Mensaje de agradecimiento por la compra  
-        redirect('pcgamer/productos'); // Regresar a la página de listado de productos    
+        echo "<script languaje=\"javascript\">                          
+                          window.location.href='/ci_proyecto/pcgamer/productos';
+                          alert('Gracias por comprar en Pc-Gamer!! Calidad, Precio y la mejor Atencion..');
+                        </script>";  
   } 
+
+  public function actualizar_stock($detalle_pedido)      
+    { 
+      $id = $detalle_pedido['producto_id'];  
+      $this->load->model('producto_model');          
+      $producto = $this->producto_model->select_producto_id_objeto($detalle_pedido['producto_id']);
+    
+      foreach ($producto as $row) 
+      {         
+        $data['Id_producto'] = $row->Id_producto;
+        $data['nombre'] = $row->nombre;
+        $data['caracteristica'] = $row->caracteristica;
+        $data['precio'] = $row->precio;
+        $data['stock'] = $row->stock;
+        $data['categoria_id'] = $row->categoria_id;
+        $data['imagen'] = $row->imagen;
+      }
+
+        $data['stock'] = ($data['stock'] - $detalle_pedido['cantidad']);
+
+        $this->load->model('admin_model');
+        $this->admin_model->actualizar_producto($data, $id);
+    }
 
   public function actualizar($id=NULL)      
     {  

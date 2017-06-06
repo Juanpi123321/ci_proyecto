@@ -24,7 +24,11 @@
 								<h3><?php  echo $row->nombre; ?></h3>
 								<p><?php  echo $row->caracteristica; ?></p>
 								<br>
-								<p><b>Stock disponible:&nbsp<?php  echo $row->stock; ?></b></p>
+								<?php if ($row->stock == 0)  { ?> 
+									<p style="color: gold"><b>*Consultar stock disponible*</b></p>
+								<?php } else { ?>
+									<p><b>Stock disponible:&nbsp<?php  echo $row->stock; ?></b></p>
+								<?php } ?>
 						</div>									
 					</div>
 					<div class="row">
