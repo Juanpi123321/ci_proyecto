@@ -63,6 +63,40 @@ function borrar ($id) {
     redirect('carrito_controller'); 
  }  
 
+ public function consultar_stock()
+ {
+  $this->load->model('producto_model');
+  if ($cart = $this->cart->contents()):
+
+          $disponibilidad = 'si';  //inicializo en verdadero
+          foreach ($cart   as   $item):           
+            $carrito = array(     
+                  'producto_id'  => $item['id'],     
+                  'cantidad'     => $item['qty']     
+                  );
+            //guardo en $producto el producto que viene de la base de datos
+            $producto = $this->producto_model->select_producto_id($carrito['producto_id']);
+
+            $stock = $producto->stock;
+            $cantidad = $carrito->cantidad;
+            //si hay stock no entra en el if
+            if ($stock < $cantidad){    //no entra aca nose xq
+              $disponibilidad = 'no';
+            } else {              //endif;
+            }
+            
+            if($disponibilidad == 'no') break;
+            
+          endforeach;
+          if($disponibilidad == 'si')
+          {
+              redirect('pedido_controller');
+            } else {
+              redirect('pcgamer');
+          }
+ endif;
+ }
+
  public function realizar_pedido(){  
   redirect('pedido_controller');
  }

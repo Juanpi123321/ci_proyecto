@@ -119,7 +119,8 @@ class Pedido_controller extends CI_Controller {
         } else {
           $this->guardar_pedido();
             
-        }         
+        }
+}         
           
   public function guardar_pedido(){
     $orden_pedido = array(    

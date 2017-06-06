@@ -40,7 +40,8 @@
 							<tr>     
 								<td>Total Compra:$<?php echo number_format($this->cart->total(),2); ?></td>
 								<td><button type="button" class="btn btn-default" onclick="limpiar_carito()">Vaciar carrito</button></td>        
-								<td><a href="<?php echo base_url('carrito_controller/realizar_pedido'); ?>" class="btn btn-primary" role="button">Ordenar compra</a></td>  
+								<td><a href="<?php echo base_url('carrito_controller/consultar_stock'); ?>" class="btn btn-primary" role="button">Ordenar compra</a></td> 
+								<!-- realizar_pedido --> 
 								<td></td>
 								<td></td>
 								<td></td>														  
