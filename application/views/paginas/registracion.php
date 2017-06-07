@@ -18,7 +18,6 @@
 		<div class="row">
 			<h4 class="text-center">Registrate y disfruta de todas nuestras promociones</h4>
 			<br>
-			<!-- <form class="form-horizontal">  //ese es el form de bootstrap-->
 
 			<!-- formulario de CodeIgniter -->
 			<?php echo validation_errors(); ?> 
@@ -27,7 +26,7 @@
 				<div class="margen-izq col-xs-11 col-sm-5 col-md-5 col-md-push-0 col-lg-5">			
 					<label class="control-label" for="textinput">Nombre completo:</label>
 					<?php echo form_input(['name' => 'nombres', 'id' => 'nombres' , 'class' => 'form-control', 'required' => 'required', 'autofocus' => 'autofocus','type' => 'text', 'value' => set_value('nombres')]); ?>
-					<br>					
+					<br>
 					<label class="control-label" for="textinput">Apellidos:</label>
 					<?php echo form_input(['name' => 'apellidos', 'id' => 'apellidos' , 'class' => 'form-control', 'required' => 'required','type' => 'text', 'value' => set_value('apellidos')]); ?>
 					<br>	

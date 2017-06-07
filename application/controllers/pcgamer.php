@@ -23,7 +23,7 @@ class Pcgamer extends CI_Controller {
 	public function productos()
   {
 
-    $data['title']= 'Bienvenido a Pc-Gamer';
+    $data['title']= 'Productos';
     $this->load->view('plantillas/header',$data);
 
     $datos = array('inicio' => '', 'contacto' => '', 'nosotros' => '', 'productos' => 'active');
@@ -105,5 +105,38 @@ class Pcgamer extends CI_Controller {
 				return $this->load->view('plantillas/nav_ingresar',$datos);
       	}
 	}
+
+	public function verificar_consulta()
+	{
+		$this->form_validation->set_rules('nombre_completo', 'Nombre de la persona', 'required');
+		$this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+
+		$this->form_validation->set_message('valid_email', 'El campo %s debe ser un mail válido');
+
+		if ($this->form_validation->run() == FALSE) {
+
+           $this->contacto();
+
+        } else {
+           $this->registrar_consulta();
+        }
+	}
+
+	public function registrar_consulta()
+	{
+        $data = array(
+              'nombre_completo' => $this->input->post('nombre_completo'),
+              'email' => $this->input->post('email'),
+              'telefono' => $this->input->post('telefono'),
+              'comentarios' => $this->input->post('comentarios')
+              );
+
+      $this->load->model('usuario_model');
+      $this->usuario_model->registrar_consulta($data);
+      echo "<script languaje=\"javascript\">                          
+                          window.location.href='/ci_proyecto/pcgamer';
+                          alert('Su consulta a sido recibida con exito! Nos estaremos comunicando a la brevedad.');
+                        </script>"; 
+      }
 
 }

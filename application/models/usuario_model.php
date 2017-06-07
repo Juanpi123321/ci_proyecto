@@ -30,6 +30,10 @@ public function buscar_persona($Id_persona){
       			  return $resultado;
    }
 
+public function registrar_consulta($data){
+        $this->db->insert('consultas', $data);
+}
+
 
  }
 

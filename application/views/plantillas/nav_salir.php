@@ -49,17 +49,16 @@
 						   </div>
 						 </div>
 						 	<hr style="margin-top: 10px; margin-bottom: 3px;">
+
+						 	<!-- solo visible para el administrador -->
+						 	<?php if ($this->session->userdata('login') and ($this->session->userdata('rol')=='1')): ?> 
+        						<a class="btn btn-default" data-toggle="tooltip" data-placement="auto" title="Ir a seccion Administrador" href="<?php echo base_url();?>admin_controller"><i class="fa fa-cog" aria-hidden="true"></i></a>
+								<?php endif;?>
+								
 						    <a href="<?php echo base_url();?>login_controller/cerrar_sesion" title=""><button type="button" class="btn btn-primary btn-sm navbar-btn" data-toggle="modal" data-target=#Cerrar>Cerrar Sesion</button></a>
+
 					  </ul>
 				</div>
 			</div>
-		
-			<!-- Buscador -->
-			<!-- <form role="search" class="navbar-form navbar-right" style="border-style: none">
-				<div class="form-group">
-					<input type="text" placeholder="Buscar" class="form-control">
-				</div>
-				<span class="btn btn-default glyphicon glyphicon-search hidden-xs hidde-sm"></span>	
-			</form> -->		
 		</div>	
 	</nav>

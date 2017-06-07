@@ -13,7 +13,7 @@ class Admin_controller extends CI_Controller {
 		$data['title']= 'Bienvenido a Pc-Gamer';
 		$this->load->view('plantillas/header',$data);
 
-		$datos = array('inicio' => 'active', 'usuarios' => '', 'productos' => '');
+		$datos = array('inicio' => 'active', 'usuarios' => '', 'productos' => '', 'ventas' => '');
     /*verifica que sea el administrador sino lo reenvia a otra pagina*/
     $this->verificar_admin($datos);
 		$this->load->view('paginas/index_admin');
@@ -36,7 +36,7 @@ class Admin_controller extends CI_Controller {
 		$data['title']= 'Usuarios';
 		$this->load->view('plantillas/header',$data);
 
-		$datos = array('inicio' => '', 'usuarios' => 'active', 'productos' => '');
+		$datos = array('inicio' => '', 'usuarios' => 'active', 'productos' => '', 'ventas' => '');
     $this->verificar_admin($datos);
 
 		$this->load->model('admin_model');
@@ -50,7 +50,7 @@ class Admin_controller extends CI_Controller {
 		$data['title']= 'Registro';
 		$this->load->view('plantillas/header',$data);
 
-		$datos = array('inicio' => '', 'usuarios' => 'active', 'productos' => '');
+		$datos = array('inicio' => '', 'usuarios' => 'active', 'productos' => '', 'ventas' => '');
     $this->verificar_admin($datos);
 		$this->load->view('paginas/registracion_admin');
 		$this->load->view('plantillas/footer');
@@ -186,7 +186,7 @@ public function insertar_persona()
       }      
     		$titulo['title']= 'Usuarios';
   			$this->load->view('plantillas/header',$titulo);
-  			$datos = array('inicio' => '', 'usuarios' => 'active', 'productos' => '');
+  			$datos = array('inicio' => '', 'usuarios' => 'active', 'productos' => '', 'ventas' => '');
         $this->verificar_admin($datos);    
     		$this->load->view('paginas/usuarios_editar_admin', $data);        
     		$this->load->view('plantillas/footer');      
@@ -210,7 +210,7 @@ public function insertar_persona()
 
       $titulo['title']= 'Imagen de Usuario';
       $this->load->view('plantillas/header',$titulo);
-      $datos = array('inicio' => '', 'usuarios' => 'active', 'productos' => '');
+      $datos = array('inicio' => '', 'usuarios' => 'active', 'productos' => '', 'ventas' => '');
       $this->verificar_admin($datos);
       $this->load->view('paginas/usuario_imagen_admin', $data);
       $this->load->view('plantillas/footer');   
@@ -241,7 +241,7 @@ public function insertar_persona()
 		$data['title']= 'Productos';
 		$this->load->view('plantillas/header',$data);
 
-		$datos = array('inicio' => '', 'usuarios' => '', 'productos' => 'active');
+		$datos = array('inicio' => '', 'usuarios' => '', 'productos' => 'active', 'ventas' => '');
     $this->verificar_admin($datos);
     
     $this->load->model('admin_model');
@@ -249,6 +249,20 @@ public function insertar_persona()
     $this->load->view('paginas/productos_admin', $data);
 		$this->load->view('plantillas/footer');
 	}
+
+  public function ventas()
+  {
+    $data['title']= 'Ventas';
+    $this->load->view('plantillas/header',$data);
+
+    $datos = array('inicio' => '', 'usuarios' => '', 'productos' => '', 'ventas' => 'active');
+    $this->verificar_admin($datos);
+    
+    $this->load->model('admin_model');
+    $data['facturas'] = $this->admin_model->select_facturas();
+    $this->load->view('paginas/ventas_admin', $data);
+    $this->load->view('plantillas/footer');
+  }
 
   public function baja_producto($id=NULL)  
     {            
@@ -271,7 +285,7 @@ public function insertar_persona()
     $data['title']= 'Agregar Producto';
     $this->load->view('plantillas/header',$data);
 
-    $datos = array('inicio' => '', 'usuarios' => '', 'productos' => 'active');
+    $datos = array('inicio' => '', 'usuarios' => '', 'productos' => 'active', 'ventas' => '');
     $this->verificar_admin($datos);
     $this->load->view('paginas/productos_agregar_admin');
     $this->load->view('plantillas/footer');
@@ -368,7 +382,7 @@ $this->form_validation->set_message('required', 'El campo %s es obligatorio');
       }
         $titulo['title']= 'Productos';
         $this->load->view('plantillas/header',$titulo);
-        $datos = array('inicio' => '', 'usuarios' => '', 'productos' => 'active');
+        $datos = array('inicio' => '', 'usuarios' => '', 'productos' => 'active', 'ventas' => '');
         $this->verificar_admin($datos);     
         $this->load->view('paginas/productos_editar_admin', $data);        
         $this->load->view('plantillas/footer');      

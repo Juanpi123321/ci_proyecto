@@ -125,7 +125,8 @@ class Pedido_controller extends CI_Controller {
   public function guardar_pedido(){
     $orden_pedido = array(    
         'cliente_id'  => $this->session->userdata('Id_usuario'),    
-        'fechayhora'  => date('Y-m-d H:i:s'),
+        'fecha'  => date('Y-m-d'),
+        'hora' => date('H:i:s'),
         'forma_pago_id' => $this->input->post('forma_pago'), 
         );
         $this->pedido_model->guardar_factura_cabecera($orden_pedido);                         

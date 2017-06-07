@@ -44,37 +44,33 @@
 			</div>
 			<div class="row">
 				<br><h4 class="margen-izq">Podes comunicarte con nosotros telefonicamente o via email por medio del siguiente formulario.</h4><br>
-				<form class="form-horizontal">
-					<div class="margen-izq col-xs-11 col-sm-5 col-md-5 col-md-push-0 col-lg-5">					
-						<div class="form-group">
-						  <label class="control-label" for="textinput">Nombre completo: (*)</label>
-						  <input id="textinput" name="textinput" type="textinput" class="form-control input-md" required> 
-						</div>
-						<div class="form-group">
-						  <label class="control-label" for="email">E-mail: (*)</label>
-						  <input id="email" name="email" type="email" class="form-control input-md" required>
-						</div>
-						<div class="form-group">
-						  <label class="control-label" for="textinput">Telefono:</label>
-						  <input id="textinput" name="textinput" type="textinput" class="form-control input-md">						 
-						</div>
+				<!-- formulario -->
+				<?php echo validation_errors(); ?>
+				<?php echo form_open('pcgamer/verificar_consulta', ['class' => 'form-signin', 'role' => 'form']); ?>
+					<div class="margen-izq col-xs-11 col-sm-5 col-md-5 col-md-push-0 col-lg-5">
+						<label class="control-label" for="textinput">Nombre completo: (*)</label>
+						<?php echo form_input(['name' => 'nombre_completo', 'id' => 'nombre_completo' , 'class' => 'form-control', 'required' => 'required', 'type' => 'text', 'value' => set_value('nombre_completo')]); ?>
+						<br>
+						<label class="control-label" for="textinput">E-mail: (*)</label>
+						<?php echo form_input(['name' => 'email', 'id' => 'email' , 'class' => 'form-control', 'required' => 'required','type' => 'email', 'value' => set_value('email')]); ?>
+						<br>
+						<label class="control-label" for="textinput">Telefono:</label>
+						<?php echo form_input(['name' => 'telefono', 'id' => 'telefono' , 'class' => 'form-control', 'type' => 'text', 'value' => set_value('telefono')]); ?>
 						<br><br>
 					</div>
 					<div class="margen-izq col-xs-11 col-sm-5 col-sm-push-1 col-md-5 col-md-push-1 col-lg-5">  
-						  <div class="form-group"> 
-						   	<label class="control-label" for="textarea">Comentarios:</label>    
-						   	<textarea class="form-control" id="textarea" name="textarea">...</textarea>
-						  </div>
-						  <div class="form-group">
-						  	<label for="robot">No soy un robot  </label>
-							<input type="checkbox" name="robot" required>
-						  </div>
-						  <div class="form-group">
-							<button type="submit" class="btn btn-primary">Enviar Comentarios</button>
-							<button type="submit" class="btn btn-primary">Refrescar</button>						
-						  </div>					
+						<label class="control-label" for="textinput">Comentarios: (*)</label>
+						<?php echo form_textarea(['name' => 'comentarios', 'id' => 'comentarios' , 'class' => 'form-control', 'required' => 'required', 'type' => 'text', 'value' => set_value('comentarios')]); ?>
+						<br>
+						<label class="control-label" for="checkbox">No soy un robot&nbsp&nbsp</label>
+						<?php echo form_checkbox('No soy un robot:', 'robot', FALSE, 'required');?>
+						<br><br>	
+						  <?php echo form_submit('Enviar Comentarios','Enviar Comentarios',"class='btn btn-primary'"); ?>
+						  
+						<br><br><br><br>
 					</div>
-				</form>				
+						  <?php echo form_close();?>		
+						  	
 			</div>			
 			<div class="visible-lg">
 				<br><br><br><br><br><br>
