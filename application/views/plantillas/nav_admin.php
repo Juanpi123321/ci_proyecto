@@ -16,10 +16,11 @@
 				<li class="<?= $usuarios ?>"><a href="<?php echo base_url(); ?>admin_controller/usuarios">USUARIOS</a></li>
 				<li class="<?= $productos ?>"><a href="<?php echo base_url(); ?>admin_controller/productos">PRODUCTOS</a></li>
 				<li class="<?= $ventas ?>"><a href="<?php echo base_url(); ?>admin_controller/ventas">VENTAS</a></li>
+				<li class="<?= $consultas ?>"><a href="<?php echo base_url(); ?>admin_controller/consultas">CONSULTAS</a></li>
 			</ul>
 
 
-			<div class="col-sm-4 col-sm-offset-0 col-md-2 col-md-push-3 col-lg-2 col-lg-push-4" style="margin-left: 0%;">
+			<div class="col-sm-4 col-sm-offset-0 col-md-2 col-md-push-2 col-lg-2 col-lg-push-3" style="margin-left: -7%;">
 				<!-- Boton de carrito -->
 				<?php if (!$this->cart->contents()){	?>
 					<a class="btn btn-default btn-lg" data-toggle="tooltip" data-placement="bottom" title="El carrito esta vacio" href="<?php echo base_url();?>carrito_controller"><span class="glyphicon glyphicon-shopping-cart"></span></a>

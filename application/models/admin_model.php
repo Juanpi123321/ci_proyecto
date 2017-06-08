@@ -121,6 +121,15 @@ public function select_productos(){
     $this->db->join('personas', 'personas.Id_persona = factura.cliente_id');
     $this->db->join('productos', 'productos.Id_producto = factura_detalle.producto_id');
     $this->db->join('rol', 'rol.Id_rol = personas.rol_id');
+    $this->db->join('forma_pago', 'forma_pago.Id_forma_pago = factura.forma_pago_id');
+    $query = $this->db->get();
+    return $query->result();
+  }
+
+  /*CONSULTAS*/
+  public function select_consultas(){       
+    $this->db->select('*');       
+    $this->db->from('consultas');
     $query = $this->db->get();
     return $query->result();
   }

@@ -125,6 +125,8 @@ class Pcgamer extends CI_Controller {
 	public function registrar_consulta()
 	{
         $data = array(
+        	  'fecha'  => date('Y-m-d'),
+        	  'hora' => date('H:i:s'),
               'nombre_completo' => $this->input->post('nombre_completo'),
               'email' => $this->input->post('email'),
               'telefono' => $this->input->post('telefono'),

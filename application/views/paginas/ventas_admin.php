@@ -29,7 +29,7 @@
 				 					<td><?php  echo $row->Id_factura; ?></td>
 				 					<td><?php  echo $row->apellidos . ', ' . $row->nombres;?></td>
 				 					<td><?php  echo $row->dni;?></td>
-				 					<td><?php  echo $row->descripcion;?></td>
+				 					<td><?php  echo $row->tipo_rol;?></td>
 				 					<td><?php  echo $row->fecha; ?></td>
 				 					<td><?php  echo $row->hora;?></td>
 				 					<td>$<?php  echo ($row->precio_unit * $row->cantidad);?></td>
@@ -48,18 +48,18 @@
 													  <thead>            
 														<th>Imagen del producto</th>                
 														<th>Nombre</th>
-														<th>Caracteristicas</th>
 														<th>Cantidad</th>
 														<th>Precio</th>
+														<th>Forma de Pago</th>
 														<th></th>
 													  </thead>
 													  	<tbody>
 													  	  <tr>
 														<td><img src="<?php echo base_url('uploads/img_productos/') . $row->imagen?>" height="150" width="150" /></td>
 															<td><?php  echo $row->nombre; ?></td>
-															<td><?php  echo $row->caracteristica; ?></td>
 															<td><?php  echo $row->cantidad; ?></td>
 															<td>$<?php  echo $row->precio_unit; ?></td>
+															<td><?php  echo $row->descripcion;?></td>
 															<td></td>
 														  </tr>
 														</tbody>
