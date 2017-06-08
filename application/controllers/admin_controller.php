@@ -50,7 +50,7 @@ class Admin_controller extends CI_Controller {
 		$data['title']= 'Registro';
 		$this->load->view('plantillas/header',$data);
 
-		$datos = array('inicio' => '', 'usuarios' => 'active', 'productos' => '', 'ventas' => '');
+		$datos = array('inicio' => '', 'usuarios' => 'active', 'productos' => '', 'ventas' => '', 'consultas' => '');
     $this->verificar_admin($datos);
 		$this->load->view('paginas/registracion_admin');
 		$this->load->view('plantillas/footer');

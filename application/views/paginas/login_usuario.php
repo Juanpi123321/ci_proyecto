@@ -18,16 +18,14 @@
 		<div class="row">
 			<h4 class="text-center">Login de Usuario</h4>
 			<br><br>
-			<!-- <form class="form-horizontal">  //ese es el form de bootstrap-->
 
-			<!-- formulario de CodeIgniter -->
-			<?php echo validation_errors(); ?> 
-
+			<!-- Formulario -->
 			<?php echo form_open('login_controller/iniciar_sesion', ['class' => 'form-signin', 'role' => 'form']); ?>				
-			<div class="col-md-6 col-md-offset-3">  
+			<div class="col-md-6 col-md-offset-3">
+			<span class="text-danger"><?php echo validation_errors(); ?></span> 
 				<label class="control-label" for="textinput">Nombre de Usuario:</label>
 				<?php echo form_input(['name' => 'usuario', 'id' => 'usuario' , 'class' => 'form-control', 'required' => 'required','autofocus' => 'autofocus' , 'placeholder' => 'Usuario', 'value' => set_value('usuario')]); ?>
-				<br>				  	
+				<br>
 				<label class="control-label" for="textinput">Contraseña:</label>
 				<?php echo form_input(['name' => 'password', 'id' => 'password' , 'class' => 'form-control', 'required' => 'required', 'placeholder' => 'Contraseña','type' => 'password', 'value' => set_value('password')]); ?>
 				<br><br><br>

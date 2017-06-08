@@ -70,7 +70,7 @@ class Login_controller extends CI_Controller {
                     $this->session->set_userdata($datos_usuario);
       return true;                            
          } else {
-               $this->form_validation->set_message('verificar_password', 'Usuario o contraseña invalidos');
+               $this->form_validation->set_message('verificar_password', '*Usuario o contraseña invalidos');
                 return false;
          }
     }

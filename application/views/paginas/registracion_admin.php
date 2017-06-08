@@ -18,9 +18,7 @@
 		<div class="row">
 			<h4 class="text-center">Registrar usuario</h4>
 			<br>
-			<!-- <form class="form-horizontal">  //ese es el form de bootstrap-->
-
-			<!-- formulario de CodeIgniter -->
+			<!-- Formulario -->
 			<?php echo validation_errors(); ?> 
 
 			<?php echo form_open_multipart('admin_controller/registrar_persona', ['class' => 'form-signin', 'role' => 'form']); ?>
