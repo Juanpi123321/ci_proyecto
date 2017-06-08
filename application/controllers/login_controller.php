@@ -32,8 +32,8 @@ class Login_controller extends CI_Controller {
   }
 
  
-  public function iniciar_sesion() {
-    
+  public function iniciar_sesion() 
+  {    
     $this->form_validation->set_rules('usuario', 'Nombre', 'required');
     $this->form_validation->set_rules('password', 'Password', 'required|callback_verificar_password');
     
@@ -75,7 +75,8 @@ class Login_controller extends CI_Controller {
          }
     }
 
-   public function usuario_logueado() {
+  public function usuario_logueado() 
+  {
       if ($this->session->userdata('login'))
       {
         $data = array();  //???
@@ -98,13 +99,13 @@ class Login_controller extends CI_Controller {
        }else{
           redirect('index');
       }
-   }
+  }
 
- public function cerrar_sesion() {
-          
+  public function cerrar_sesion() 
+  {          
       $this->session->sess_destroy();
     
       redirect('pcgamer');
-   }
+  }
 
 }

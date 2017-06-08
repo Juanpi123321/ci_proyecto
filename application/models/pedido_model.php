@@ -19,19 +19,19 @@ class Pedido_model extends CI_Model
   }
 
   public function actualizar($data, $id)  
- {  
+  {  
     $this->db->where('Id_persona', $id);
     $this->db->update('personas', $data);
- }
+  }
 
- public function select_usuario_id($id)  
- {                          
-      $this->db->select('*');                           
-      $this->db->from('usuarios');                           
-      $this->db->where('Id_usuario', $id);                           
-      $query = $this->db->get();                           
-      return $query->result();     
- }
+  public function select_usuario_id($id)  
+  {                          
+    $this->db->select('*');                           
+    $this->db->from('usuarios');                           
+    $this->db->where('Id_usuario', $id);                           
+    $query = $this->db->get();                           
+    return $query->result();     
+  }
 
  public function select_persona_id($id)  
  {                          

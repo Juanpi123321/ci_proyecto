@@ -63,7 +63,7 @@ public function registrar_persona() //verifica todos los campos
    $this->form_validation->set_rules('imagen', 'Seleccionar una imagen',  'callback_validar_imagen');
 
 
-/*para que mustre el mensaje con esa leyendo o sino va a mostrar en ingles*/
+/*para que mustre el mensaje con esa leyenda o sino va a mostrar en ingles*/
 $this->form_validation->set_message('valid_email', 'El campo %s debe ser un mail válido');
 $this->form_validation->set_message('integer', 'El campo %s debe poseer solo numeros enteros');
 $this->form_validation->set_message('required', 'El campo %s es obligatorio');

@@ -108,8 +108,8 @@ class Pedido_controller extends CI_Controller {
     }
   }
 
- public function verificar_pedido()  
- {  //verifica que haya seleccionado una forma pago 
+  public function verificar_pedido()  
+  {  //verifica que haya seleccionado una forma pago 
     $this->form_validation->set_rules('opciones', 'Opciones de pago', 'callback_forma_pago');
 
     if ($this->form_validation->run() == FALSE) {
@@ -120,7 +120,7 @@ class Pedido_controller extends CI_Controller {
           $this->guardar_pedido();
             
         }
- }         
+  }         
           
   public function guardar_pedido(){
     $orden_pedido = array(    
@@ -141,8 +141,7 @@ class Pedido_controller extends CI_Controller {
                   'precio_unit'  => $item['price']     
                   );                                                   
             $this->pedido_model->guardar_factura_detalle($detalle_pedido);
-            
-            //actualizar el stock
+
             $this->actualizar_stock($detalle_pedido);
 
           endforeach;   
@@ -155,41 +154,41 @@ class Pedido_controller extends CI_Controller {
   } 
 
   public function actualizar_stock($detalle_pedido)      
-    { 
-      $id = $detalle_pedido['producto_id'];  
-      $this->load->model('producto_model');          
-      $producto = $this->producto_model->select_producto_id_objeto($detalle_pedido['producto_id']);
-    
-      foreach ($producto as $row) 
-      {         
-        $data['Id_producto'] = $row->Id_producto;
-        $data['nombre'] = $row->nombre;
-        $data['caracteristica'] = $row->caracteristica;
-        $data['precio'] = $row->precio;
-        $data['stock'] = $row->stock;
-        $data['categoria_id'] = $row->categoria_id;
-        $data['imagen'] = $row->imagen;
-      }
-
-        $data['stock'] = ($data['stock'] - $detalle_pedido['cantidad']);
-
-        $this->load->model('admin_model');
-        $this->admin_model->actualizar_producto($data, $id);
+  { 
+    $id = $detalle_pedido['producto_id'];  
+    $this->load->model('producto_model');          
+    $producto = $this->producto_model->select_producto_id_objeto($detalle_pedido['producto_id']);
+  
+    foreach ($producto as $row) 
+    {         
+      $data['Id_producto'] = $row->Id_producto;
+      $data['nombre'] = $row->nombre;
+      $data['caracteristica'] = $row->caracteristica;
+      $data['precio'] = $row->precio;
+      $data['stock'] = $row->stock;
+      $data['categoria_id'] = $row->categoria_id;
+      $data['imagen'] = $row->imagen;
     }
+
+      $data['stock'] = ($data['stock'] - $detalle_pedido['cantidad']);
+
+      $this->load->model('admin_model');
+      $this->admin_model->actualizar_producto($data, $id);
+  }
 
   public function actualizar($id=NULL)      
-    {  
-            $data = array(
-                'email' => $this->input->post('email'),
-                'nombres' => $this->input->post('nombres'),
-                'apellidos' => $this->input->post('apellidos'),
-                'dni' => $this->input->post('dni'),
-                'direccion' => $this->input->post('direccion'),
-                ); 
-                
-                $this->load->model('pedido_model');
-                $this->pedido_model->actualizar($data, $id);   
-                redirect('pedido_controller');
-    }
+  {  
+      $data = array(
+          'email' => $this->input->post('email'),
+          'nombres' => $this->input->post('nombres'),
+          'apellidos' => $this->input->post('apellidos'),
+          'dni' => $this->input->post('dni'),
+          'direccion' => $this->input->post('direccion'),
+          ); 
+          
+          $this->load->model('pedido_model');
+          $this->pedido_model->actualizar($data, $id);   
+          redirect('pedido_controller');
+  }
 
 }

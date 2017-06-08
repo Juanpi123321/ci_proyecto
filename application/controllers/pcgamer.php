@@ -15,26 +15,26 @@ class Pcgamer extends CI_Controller {
 
 		$datos = array('inicio' => 'active', 'contacto' => '', 'nosotros' => '', 'productos' => '');
 		/*selecciona el navbar que va a mostrar, el de admin o cliente*/
-      	$this->seleccionar_nav($datos);
+	  	$this->seleccionar_nav($datos);
 		$this->load->view('paginas/index');
 		$this->load->view('plantillas/footer');
 	}
 
 	public function productos()
-  {
+    {
 
-    $data['title']= 'Productos';
-    $this->load->view('plantillas/header',$data);
+	    $data['title']= 'Productos';
+	    $this->load->view('plantillas/header',$data);
 
-    $datos = array('inicio' => '', 'contacto' => '', 'nosotros' => '', 'productos' => 'active');
-    $this->seleccionar_nav($datos);
+	    $datos = array('inicio' => '', 'contacto' => '', 'nosotros' => '', 'productos' => 'active');
+	    $this->seleccionar_nav($datos);
 
-    $this->load->model('admin_model');
-    $productos['productos'] = $this->admin_model->select_productos();
-    $this->load->view('paginas/productos', $productos);
-    $this->load->view('plantillas/footer');
+	    $this->load->model('admin_model');
+	    $productos['productos'] = $this->admin_model->select_productos();
+	    $this->load->view('paginas/productos', $productos);
+	    $this->load->view('plantillas/footer');
    
-}
+    }
 
 	public function contacto()
 	{

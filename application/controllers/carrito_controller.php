@@ -4,10 +4,10 @@
 class Carrito_controller extends CI_Controller {
 
 
-		function __construct()
-    			{
-        			parent::__construct();
-    			}
+      	function __construct()
+        			{
+            			parent::__construct();
+        			}
 
   public function index()
   {
@@ -37,8 +37,8 @@ class Carrito_controller extends CI_Controller {
     $this->load->view('plantillas/footer');
   }
 
-public function agregar_carrito() 
-{        
+  public function agregar_carrito() 
+  {        
            $data = array( 
                   'id' => $this->input->post('id'), 
                   'name' => $this->input->post('nombre'), 
@@ -46,10 +46,10 @@ public function agregar_carrito()
                   'qty' => $this->input->post('cantidad') 
                 );   
                 $this->cart->insert($data); 
- redirect('carrito_controller'); 
-}  
+   redirect('carrito_controller'); 
+  }  
  
-function borrar ($id) { 
+  function borrar ($id) { 
     if ($id=="all"){ 
       $this->cart->destroy(); 
     }else{ 
@@ -61,12 +61,12 @@ function borrar ($id) {
     } 
     
     redirect('carrito_controller'); 
- }  
+  }  
 
- public function consultar_stock()
- {
-  $this->load->model('producto_model');
-  if ($cart = $this->cart->contents()):
+  public function consultar_stock()
+  {
+    $this->load->model('producto_model');
+    if ($cart = $this->cart->contents()):
 
           $disponibilidad = TRUE;  //inicializo en verdadero
           foreach ($cart   as   $item):           
@@ -95,14 +95,13 @@ function borrar ($id) {
                           alert('No hay stock disponible. Comuniquese con nuestro equipo para realizar un pedido. Disculpe las molestias');
                           window.location.href='index';
                         </script>";
-
-                  //redirect('pcgamer/productos');
             }            
- endif;
- }
+    endif;
+  }
 
- public function realizar_pedido(){  
-  redirect('pedido_controller');
- }
+  public function realizar_pedido()
+  {  
+    redirect('pedido_controller');
+  }
 
 }

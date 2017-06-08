@@ -19,8 +19,7 @@
 				<li class="<?= $consultas ?>"><a href="<?php echo base_url(); ?>admin_controller/consultas">CONSULTAS</a></li>
 			</ul>
 
-
-			<div class="col-sm-4 col-sm-offset-0 col-md-2 col-md-push-2 col-lg-2 col-lg-push-3" style="margin-left: -7%;">
+			<div class="navbar-right margen-boton-navbar">
 				<!-- Boton de carrito -->
 				<?php if (!$this->cart->contents()){	?>
 					<a class="btn btn-default btn-lg" data-toggle="tooltip" data-placement="bottom" title="El carrito esta vacio" href="<?php echo base_url();?>carrito_controller"><span class="glyphicon glyphicon-shopping-cart"></span></a>
@@ -29,7 +28,7 @@
 					<?php } ?>
 
 				<!-- Boton de sesion -->
-				<div class="btn-group navbar-right margen-boton-navbar">		
+				<div class="btn-group">		
 				  <button type="button" class="btn btn-default btn-circle btn-lg dropdown-toggle" data-toggle="dropdown" style="margin: 0px;"><i class="glyphicon glyphicon-user"></i></button>
 					  <ul class="dropdown-menu" style="background: ghostwhite; color: black; text-align: center;">
 					    <hr style="margin-top: 3px;">
@@ -47,7 +46,6 @@
 						    <a href="<?php echo base_url();?>login_controller/cerrar_sesion" title=""><button type="button" class="btn btn-primary btn-sm navbar-btn" data-toggle="modal" data-target=#Cerrar>Cerrar Sesion</button></a>
 					  </ul>
 				</div>
-			</div>
-				
+			</div>				
 		</div>
 	</nav>

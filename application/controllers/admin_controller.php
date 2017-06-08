@@ -56,43 +56,41 @@ class Admin_controller extends CI_Controller {
 		$this->load->view('plantillas/footer');
 	}
 
-public function registrar_persona() //verifica todos los campos
-
+  public function registrar_persona() //verifica todos los campos
 	{          
-   $this->form_validation->set_rules('nombres', 'Nombre de la persona', 'required');
-   $this->form_validation->set_rules('apellidos', 'Apellido de la persona', 'required');
-   
-   $this->form_validation->set_rules('dni', 'DNI de la persona', 'required|integer');
-   $this->form_validation->set_rules('direccion', 'Direccion de la persona');
-   $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+    $this->form_validation->set_rules('nombres', 'Nombre de la persona', 'required');
+    $this->form_validation->set_rules('apellidos', 'Apellido de la persona', 'required');
+    
+    $this->form_validation->set_rules('dni', 'DNI de la persona', 'required|integer');
+    $this->form_validation->set_rules('direccion', 'Direccion de la persona');
+    $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
 
-   $this->form_validation->set_rules('usuario', 'usuario', 'trim|required');
-   $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[8]');
-   $this->form_validation->set_rules('passconf', 'Confirmar password', 'trim|required|matches[password]');  /*trim me quita espacios*/
-   $this->form_validation->set_rules('imagen', 'Seleccionar una imagen',  'callback_validar_imagen');
-
-
-/*para que mustre el mensaje con esa leyendo o sino va a mostrar en ingles*/
-$this->form_validation->set_message('valid_email', 'El campo %s debe ser un mail válido');
-$this->form_validation->set_message('integer', 'El campo %s debe poseer solo numeros enteros');
-$this->form_validation->set_message('required', 'El campo %s es obligatorio');
-$this->form_validation->set_message('min_length', 'El campo %s debe contener como mínimo %d caracteres');
-$this->form_validation->set_message('matches', 'las contraseñas no coinciden');
+    $this->form_validation->set_rules('usuario', 'usuario', 'trim|required');
+    $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[8]');
+    $this->form_validation->set_rules('passconf', 'Confirmar password', 'trim|required|matches[password]');  /*trim me quita espacios*/
+    $this->form_validation->set_rules('imagen', 'Seleccionar una imagen',  'callback_validar_imagen');
 
 
-   if ($this->form_validation->run() == FALSE) {
+    /*para que mustre el mensaje con esa leyendo o sino va a mostrar en ingles*/
+    $this->form_validation->set_message('valid_email', 'El campo %s debe ser un mail válido');
+    $this->form_validation->set_message('integer', 'El campo %s debe poseer solo numeros enteros');
+    $this->form_validation->set_message('required', 'El campo %s es obligatorio');
+    $this->form_validation->set_message('min_length', 'El campo %s debe contener como mínimo %d caracteres');
+    $this->form_validation->set_message('matches', 'las contraseñas no coinciden');
 
-                $this->registracion_admin();
+
+    if ($this->form_validation->run() == FALSE) {
+
+            $this->registracion_admin();
 
         } else {
-           $this->insertar_persona();
+            $this->insertar_persona();
             
         }         
-          
-     }
+  }
 
-function validar_imagen($imagen)  //Verifica que se ingreso una imagen   
-{         
+  function validar_imagen($imagen)  //Verifica que se ingreso una imagen   
+  {         
       $nombre_imagen = $_FILES['imagen']['name']; //Obtiene el nombre de la imagen            
       if (empty($nombre_imagen))             
       {              
@@ -101,10 +99,10 @@ function validar_imagen($imagen)  //Verifica que se ingreso una imagen
       } else {                           
         return true;             
       }     
-}
+  }
 
-public function insertar_persona()
-{	
+  public function insertar_persona()
+  {	
 		$config['upload_path'] = './uploads/img_usuarios';            
         $config['allowed_types'] = 'jpg|JPG|jpeg|JPEG|png|PNG';            
         $config['remove_spaces'] = TRUE;            
@@ -140,99 +138,99 @@ public function insertar_persona()
   }
 
 	public function eliminar_usuario($id=NULL)  
-    {            
+  {            
 	 	$data = array('estado'=> '0');     
             $this->load->model('admin_model');                   
             $this->admin_model->estado_usuario($data, $id);                    
             redirect('admin_controller/usuarios');    
-    }
+  }
 
   public function imagen($id=NULL)  
-    {            
+  {            
     $data = array('estado'=> '0');     
             $this->load->model('admin_model');                   
             $this->admin_model->estado_usuario($data, $id);                    
             redirect('admin_controller/usuarios');    
-    }  
+  }  
 
 	public function activar_usuario($id=NULL)      
-	  {
+	{
 		$data = array('estado'=> '1');     
             $this->load->model('admin_model');                   
             $this->admin_model->estado_usuario($data, $id);                    
             redirect('admin_controller/usuarios');    
+  }
+
+  public function editar_usuario($id=NULL)      
+  {             
+  	$this->load->model('admin_model');             
+  	$usuario = $this->admin_model->select_usuario_id($id);
+    $persona = $this->admin_model->select_persona_id($id);   
+  
+  	foreach ($usuario as $row) 
+  	{         
+  		$data['Id_usuario'] = $row->Id_usuario;
+      $data['usuario'] = $row->usuario;
+  	}
+    foreach ($persona as $row) 
+    {         
+      $data['email'] = $row->email;
+      $data['nombres'] = $row->nombres;
+      $data['apellidos'] = $row->apellidos;
+      $data['dni'] = $row->dni;
+      $data['direccion'] = $row->direccion;
+      
+      
+    }      
+  		$titulo['title']= 'Usuarios';
+			$this->load->view('plantillas/header',$titulo);
+			$datos = array('inicio' => '', 'usuarios' => 'active', 'productos' => '', 'ventas' => '', 'consultas' => '');
+      $this->verificar_admin($datos);    
+  		$this->load->view('paginas/usuarios_editar_admin', $data);        
+  		$this->load->view('plantillas/footer');      
+ 	} 
+
+  public function imagen_usuario($id=NULL)      
+  {             
+    $this->load->model('admin_model');  //uso el model para sacar a la persona y al usuario
+    $persona = $this->admin_model->select_persona_id($id);
+    $usuario = $this->admin_model->select_usuario_id($id);
+    /*Saco los datos mediante el foreach y despues los paso a la vista*/
+    foreach ($persona as $row) 
+    {         
+      $data['imagen'] = $row->imagen;
+      $data['nombres'] = $row->nombres;      
     }
+    foreach ($usuario as $row) 
+    {         
+      $data['usuario'] = $row->usuario;      
+    }      
 
-    public function editar_usuario($id=NULL)      
-    {             
-    	$this->load->model('admin_model');             
-    	$usuario = $this->admin_model->select_usuario_id($id);
-      $persona = $this->admin_model->select_persona_id($id);   
-    
-    	foreach ($usuario as $row) 
-    	{         
-    		$data['Id_usuario'] = $row->Id_usuario;
-        $data['usuario'] = $row->usuario;
-    	}
-      foreach ($persona as $row) 
-      {         
-        $data['email'] = $row->email;
-        $data['nombres'] = $row->nombres;
-        $data['apellidos'] = $row->apellidos;
-        $data['dni'] = $row->dni;
-        $data['direccion'] = $row->direccion;
-        
-        
-      }      
-    		$titulo['title']= 'Usuarios';
-  			$this->load->view('plantillas/header',$titulo);
-  			$datos = array('inicio' => '', 'usuarios' => 'active', 'productos' => '', 'ventas' => '', 'consultas' => '');
-        $this->verificar_admin($datos);    
-    		$this->load->view('paginas/usuarios_editar_admin', $data);        
-    		$this->load->view('plantillas/footer');      
-   	} 
+    $titulo['title']= 'Imagen de Usuario';
+    $this->load->view('plantillas/header',$titulo);
+    $datos = array('inicio' => '', 'usuarios' => 'active', 'productos' => '', 'ventas' => '', 'consultas' => '');
+    $this->verificar_admin($datos);
+    $this->load->view('paginas/usuario_imagen_admin', $data);
+    $this->load->view('plantillas/footer');   
+  } 
 
-    public function imagen_usuario($id=NULL)      
-    {             
-      $this->load->model('admin_model');  //uso el model para sacar a la persona y al usuario
-      $persona = $this->admin_model->select_persona_id($id);
-      $usuario = $this->admin_model->select_usuario_id($id);
-      /*Saco los datos mediante el foreach y despues los paso a la vista*/
-      foreach ($persona as $row) 
-      {         
-        $data['imagen'] = $row->imagen;
-        $data['nombres'] = $row->nombres;      
-      }
-      foreach ($usuario as $row) 
-      {         
-        $data['usuario'] = $row->usuario;      
-      }      
-
-      $titulo['title']= 'Imagen de Usuario';
-      $this->load->view('plantillas/header',$titulo);
-      $datos = array('inicio' => '', 'usuarios' => 'active', 'productos' => '', 'ventas' => '', 'consultas' => '');
-      $this->verificar_admin($datos);
-      $this->load->view('paginas/usuario_imagen_admin', $data);
-      $this->load->view('plantillas/footer');   
-    } 
-
-    public function actualizar($id=NULL)      
-    {   // VALIDAR LOS DATOS INGRESADOS   
-            $data_us = array(
-                'usuario' => $this->input->post('usuario'),
-                );
-            $data_per = array(
-                'email' => $this->input->post('email'),
-                'nombres' => $this->input->post('nombres'),
-                'apellidos' => $this->input->post('apellidos'),
-                'dni' => $this->input->post('dni'),
-                'direccion' => $this->input->post('direccion'),
-                ); 
-                
-                $this->load->model('admin_model');
-                $this->admin_model->actualizar_usuario($data_us,$data_per, $id);   
-                redirect('admin_controller/usuarios');
-    }
+  public function actualizar($id=NULL)      
+  {   // VALIDAR LOS DATOS INGRESADOS   
+          $data_us = array(
+              'usuario' => $this->input->post('usuario'),
+              );
+          $data_per = array(
+              'email' => $this->input->post('email'),
+              'nombres' => $this->input->post('nombres'),
+              'apellidos' => $this->input->post('apellidos'),
+              'dni' => $this->input->post('dni'),
+              'direccion' => $this->input->post('direccion'),
+              ); 
+              
+              $this->load->model('admin_model');
+              $this->admin_model->actualizar_usuario($data_us,$data_per, $id);   
+              redirect('admin_controller/usuarios');
+  }
 
 
 
@@ -265,20 +263,20 @@ public function insertar_persona()
   }
 
   public function baja_producto($id=NULL)  
-    {            
+  {            
     $data = array('estado'=> '0');     
             $this->load->model('admin_model');                   
             $this->admin_model->estado_producto($data, $id);                    
             redirect('admin_controller/productos');    
-    }
+  }
 
   public function alta_producto($id=NULL)      
-    {
+  {
     $data = array('estado'=> '1');     
             $this->load->model('admin_model');                   
             $this->admin_model->estado_producto($data, $id);                    
             redirect('admin_controller/productos');    
-    }
+  }
 
   public function productos_agregar_admin()
   {
@@ -292,25 +290,24 @@ public function insertar_persona()
   }
 
   public function verificar_producto() //verifica todos los campos
-
   {          
-   $this->form_validation->set_rules('nombre', 'Nombre del producto', 'required');
-   $this->form_validation->set_rules('caracteristica', 'Caracteristica del producto', 'required');
+    $this->form_validation->set_rules('nombre', 'Nombre del producto', 'required');
+    $this->form_validation->set_rules('caracteristica', 'Caracteristica del producto', 'required');
    
-   $this->form_validation->set_rules('precio', 'Precio', 'required|decimal');
-   $this->form_validation->set_rules('stock', 'Stock|integer');
-   $this->form_validation->set_rules('categoria', 'Categoria', 'required');
+    $this->form_validation->set_rules('precio', 'Precio', 'required|decimal');
+    $this->form_validation->set_rules('stock', 'Stock|integer');
+    $this->form_validation->set_rules('categoria', 'Categoria', 'required');
 
-   $this->form_validation->set_rules('imagen', 'Seleccionar una imagen',  'callback_validar_imagen');
-
-
-/*para que mustre el mensaje con esa leyendo o sino va a mostrar en ingles*/
-$this->form_validation->set_message('decimal', 'El campo %s debe poseer solo numeros decimales');
-$this->form_validation->set_message('integer', 'El campo %s debe poseer solo numeros enteros');
-$this->form_validation->set_message('required', 'El campo %s es obligatorio');
+    $this->form_validation->set_rules('imagen', 'Seleccionar una imagen',  'callback_validar_imagen');
 
 
-   if ($this->form_validation->run() == FALSE) {
+    /*para que mustre el mensaje con esa leyendo o sino va a mostrar en ingles*/
+    $this->form_validation->set_message('decimal', 'El campo %s debe poseer solo numeros decimales');
+    $this->form_validation->set_message('integer', 'El campo %s debe poseer solo numeros enteros');
+    $this->form_validation->set_message('required', 'El campo %s es obligatorio');
+
+
+    if ($this->form_validation->run() == FALSE) {
 
                 $this->productos_agregar_admin();
 
@@ -319,7 +316,7 @@ $this->form_validation->set_message('required', 'El campo %s es obligatorio');
             
         }         
           
-     }
+    }
 
   public function insertar_producto()
   { 
@@ -350,7 +347,7 @@ $this->form_validation->set_message('required', 'El campo %s es obligatorio');
   }
 
   public function actualizar_producto($id=NULL)      
-    {   // VALIDAR LOS DATOS INGRESADOS  
+  {   // VALIDAR LOS DATOS INGRESADOS  
             $data = array(
                 'nombre' => $this->input->post('nombre'),
                 'caracteristica' => $this->input->post('caracteristica'),
@@ -362,33 +359,33 @@ $this->form_validation->set_message('required', 'El campo %s es obligatorio');
                 $this->load->model('admin_model');
                 $this->admin_model->actualizar_producto($data, $id);   
                 redirect('admin_controller/productos');
+  }
+
+  public function editar_producto($id=NULL)      
+  {             
+    $this->load->model('admin_model');             
+    $producto = $this->admin_model->select_productos_id($id);
+  
+    foreach ($producto as $row) 
+    {         
+      $data['Id_producto'] = $row->Id_producto;
+      $data['nombre'] = $row->nombre;
+      $data['caracteristica'] = $row->caracteristica;
+      $data['precio'] = $row->precio;
+      $data['stock'] = $row->stock;
+      $data['categoria_id'] = $row->categoria_id;
+      $data['imagen'] = $row->imagen;
+
     }
+      $titulo['title']= 'Productos';
+      $this->load->view('plantillas/header',$titulo);
+      $datos = array('inicio' => '', 'usuarios' => '', 'productos' => 'active', 'ventas' => '', 'consultas' => '');
+      $this->verificar_admin($datos);     
+      $this->load->view('paginas/productos_editar_admin', $data);        
+      $this->load->view('plantillas/footer');      
+  }
 
-    public function editar_producto($id=NULL)      
-    {             
-      $this->load->model('admin_model');             
-      $producto = $this->admin_model->select_productos_id($id);
-    
-      foreach ($producto as $row) 
-      {         
-        $data['Id_producto'] = $row->Id_producto;
-        $data['nombre'] = $row->nombre;
-        $data['caracteristica'] = $row->caracteristica;
-        $data['precio'] = $row->precio;
-        $data['stock'] = $row->stock;
-        $data['categoria_id'] = $row->categoria_id;
-        $data['imagen'] = $row->imagen;
-
-      }
-        $titulo['title']= 'Productos';
-        $this->load->view('plantillas/header',$titulo);
-        $datos = array('inicio' => '', 'usuarios' => '', 'productos' => 'active', 'ventas' => '', 'consultas' => '');
-        $this->verificar_admin($datos);     
-        $this->load->view('paginas/productos_editar_admin', $data);        
-        $this->load->view('plantillas/footer');      
-    }
-
-    function verificar_admin($datos)
+  function verificar_admin($datos)
   {
     if ($this->session->userdata('login') and ($this->session->userdata('rol')=='1'))
         {
