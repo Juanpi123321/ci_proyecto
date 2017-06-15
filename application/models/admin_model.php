@@ -117,14 +117,22 @@ class Admin_model extends CI_Model
   }
 
   /*VENTAS*/
-    public function select_facturas(){       
+  public function select_facturas_cabecera(){       
+      $this->db->select('*');       
+      $this->db->from('factura');
+      $this->db->join('personas', 'personas.Id_persona = factura.cliente_id');
+      $this->db->join('forma_pago', 'forma_pago.Id_forma_pago = factura.forma_pago_id');
+      $query = $this->db->get();
+      return $query->result();
+  }
+
+  public function select_facturas_completa(){       
       $this->db->select('*');       
       $this->db->from('factura');    
       $this->db->join('factura_detalle', 'factura_detalle.factura_id = factura.Id_factura');
       $this->db->join('personas', 'personas.Id_persona = factura.cliente_id');
       $this->db->join('productos', 'productos.Id_producto = factura_detalle.producto_id');
       $this->db->join('rol', 'rol.Id_rol = personas.rol_id');
-      $this->db->join('forma_pago', 'forma_pago.Id_forma_pago = factura.forma_pago_id');
       $query = $this->db->get();
       return $query->result();
   }

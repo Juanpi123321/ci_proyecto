@@ -30,6 +30,16 @@ class Usuario_model extends CI_Model
         			  return $resultado;
   }
 
+  public function buscar_persona_dni($dni)
+  {
+                            $this->db->select('*');
+                            $this->db->from('personas');
+                            $this->db->where('dni', $dni);
+                            $query = $this->db->get();
+                            $resultado = $query->row();
+                return $resultado;
+  }
+
   public function registrar_consulta($data)
   {
           $this->db->insert('consultas', $data);

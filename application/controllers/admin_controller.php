@@ -61,7 +61,7 @@ class Admin_controller extends CI_Controller {
     $this->form_validation->set_rules('nombres', 'Nombre de la persona', 'required');
     $this->form_validation->set_rules('apellidos', 'Apellido de la persona', 'required');
     
-    $this->form_validation->set_rules('dni', 'DNI de la persona', 'required|integer');
+    $this->form_validation->set_rules('dni', 'DNI de la persona', 'required|integer|callback_validar_dni');
     $this->form_validation->set_rules('direccion', 'Direccion de la persona');
     $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
 
@@ -101,6 +101,20 @@ class Admin_controller extends CI_Controller {
       }     
   }
 
+  function validar_dni($dni)
+  {
+      $dni = $this->input->post('dni');
+      $this->load->model('usuario_model');
+      $usuario = $this->usuario_model->buscar_persona_dni($dni);
+      if (empty($usuario))             
+          {              
+            return true;                            
+          } else {                           
+            $this->form_validation->set_message('validar_dni', 'Este DNI ya fue utilizado');              
+            return false;            
+          }
+  }
+  
   public function insertar_persona()
   {	
 		$config['upload_path'] = './uploads/img_usuarios';            
@@ -257,7 +271,8 @@ class Admin_controller extends CI_Controller {
     $this->verificar_admin($datos);
     
     $this->load->model('admin_model');
-    $data['facturas'] = $this->admin_model->select_facturas();
+    $data['facturas_completa'] = $this->admin_model->select_facturas_completa();
+    $data['facturas_cabecera'] = $this->admin_model->select_facturas_cabecera();
     $this->load->view('paginas/ventas_admin', $data);
     $this->load->view('plantillas/footer');
   }
