@@ -51,8 +51,13 @@ nav.navbar{
     color: ghostwhite;
 }
 /*navbar de administrativo*/
-nav.navbar-admin{
+nav.navbar-admin, .navbar-admin .dropdown-menu > li > a,
+.navbar-admin .dropdown-menu, .navbar-admin .open .dropdown-menu > li > a,
+.dropdown-menu > li > a, .dropdown-menu,
+.navbar-admin .navbar-nav .open .dropdown-menu > li > a
+{
     background: ghostwhite;
+    color: black;
 }
 /*los elementos de la barra administrativo*/
 .navbar-admin .navbar-nav > li > a{
@@ -76,7 +81,7 @@ nav.navbar-admin{
 }
 /*la sublista*/
 .dropdown-menu > li > a, .dropdown-menu,
-.navbar-default .navbar-nav .open .dropdown-menu > li > a{
+.navbar-nav .open .dropdown-menu > li > a{
 	background: black;
 	color: ghostwhite;
     padding: 8px 10px;

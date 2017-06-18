@@ -9,29 +9,30 @@
 				</div>
 				<br>
 				<div class="row">
-				    <div class="col-xs-2 col-xs-offset-1 col-sm-4 col-sm-offset-3 col-md-6 col-md-offset-1">
-				    	<br><br>
-				    	<?php if (!empty($fecha_busqueda)): ?>
-				    		<h2>Fecha: "<?php echo $fecha_busqueda?>"</h2>	
-				    	<?php endif;?>			    	        
-				    </div>
-				    <div class="col-xs-6 col-xs-offset-2 col-sm-4 col-sm-offset-0 col-md-4 col-md-offset-1">
-				    	<?php echo form_open("admin_controller/ventas"); ?>
+				    <div class="col-xs-8 col-xs-offset-4 col-sm-4 col-sm-offset-8 col-md-4 col-md-offset-8">
+				    	<?php echo form_open("admin_controller/ventas_categoria"); ?>
 
-				    	<label class="control-label">Fecha:&nbsp</label>
+				    	<label class="control-label">Categoria:&nbsp</label>
 				    	<?php $opciones = array( 0 => 'Ver todas');
-					    		foreach ($facturas_fechas as $row)
+					    		foreach ($facturas_completa as $row)
 					    		{
-					    			$opciones[$row->fecha] = 	$row->fecha;
+					    			$opciones[$row->descripcion_categoria] = 	$row->descripcion_categoria;
 					    		}
-						echo form_dropdown('fecha_busqueda', $opciones, '0'); 
+						echo form_dropdown('categoria_busqueda', $opciones, '0'); 
 						echo form_submit('Listar','Listar',"class='btn btn-primary'"); ?>
 
 				    </div>
 				    <?php echo form_close();?>
+
+				    <div class="col-xs-10 col-xs-offset-2 col-sm-8 col-sm-offset-3 col-md-6 col-md-offset-3">
+				    	<br><br>
+				    	<?php if (!empty($categoria_busqueda)){ ?>
+				    		<h2>Ventas de: "<?php echo $categoria_busqueda?>"</h2>	
+				    	<?php } else {?>
+							<h2>Ventas de TODAS las Categorias</h2>
+				    	<?php }?>	        
+				    </div>
 				</div>
-				<br>
-				<br>
 				<br>
 				<br>
 				<!-- Tabla de Ventas -->               
@@ -56,7 +57,7 @@
 				 					<td><?php  echo $row->dni;?></td>
 				 					<td><?php  echo $row->fecha; ?></td>
 				 					<td><?php  echo $row->hora;?></td>
-				 					<td><?php  echo $row->descripcion;?></td>
+				 					<td><?php  echo $row->descripcion_formapago;?></td>
 				 					<td>
 										<button type="button" class="btn btn-primary" data-toggle="modal"  data-target="#<?php echo $row->Id_factura; ?>">ver mas</button>
 										<!-- Modal -->
@@ -74,6 +75,7 @@
 													  <thead>            
 														<th>Imagen del producto</th>                
 														<th>Nombre</th>
+														<th>Categoria</th>
 														<th>Precio unitario</th>
 														<th>Cantidad</th>
 														<th>Subtotal</th>
@@ -85,6 +87,7 @@
 													  	  <?php if ($Id_factura == $row->factura_id): ;?>
 														<td><img src="<?php echo base_url('uploads/img_productos/') . $row->imagen?>" height="150" width="150" /></td>
 															<td><?php  echo $row->nombre; ?></td>
+															<td><?php  echo $row->descripcion_categoria; ?></td>
 															<td>$<?php  echo $row->precio_unit; ?></td>
 															<td><?php  echo $row->cantidad; ?></td>
 															<td>$<?php echo $row->precio_unit * $row->cantidad?></td>

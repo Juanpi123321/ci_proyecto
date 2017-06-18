@@ -15,7 +15,13 @@
 				<li class="<?= $inicio ?>"><a href="<?php echo base_url(); ?>admin_controller">ADMINISTRADOR</a></li>
 				<li class="<?= $usuarios ?>"><a href="<?php echo base_url(); ?>admin_controller/usuarios">USUARIOS</a></li>
 				<li class="<?= $productos ?>"><a href="<?php echo base_url(); ?>admin_controller/productos">PRODUCTOS</a></li>
-				<li class="<?= $ventas ?>"><a href="<?php echo base_url(); ?>admin_controller/ventas">VENTAS</a></li>
+				<li class="dropdown <?= $ventas ?>">
+					<a data-toggle="dropdown" class="dropdown-toggle" href="<?php echo base_url(); ?>admin_controller/ventas_clientes/#">VENTAS<b class="caret"></b></a>
+					<ul role="menu" class="dropdown-menu">
+						<li><a href="<?php echo base_url(); ?>admin_controller/ventas_clientes">CLIENTES</a></li>
+						<li><a href="<?php echo base_url(); ?>admin_controller/ventas_categoria">CATEGORIA</a></li>
+					</ul>
+				</li>
 				<li class="<?= $consultas ?>"><a href="<?php echo base_url(); ?>admin_controller/consultas">CONSULTAS</a></li>
 			</ul>
 

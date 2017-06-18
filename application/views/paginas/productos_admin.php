@@ -41,7 +41,7 @@
 				 					<td><?php  echo $row->caracteristica?></td>
 				 					<td><?php  echo $row->stock; ?></td>
 				 					<td><?php  echo $row->precio; ?></td>
-				 					<td><?php  echo $row->descripcion; ?></td>		 					
+				 					<td><?php  echo $row->descripcion_categoria; ?></td>		 					
 			 						<td>
 			 							<a class="btn btn-success" href="<?php echo base_url("admin_controller/editar_producto/$row->Id_producto");?>" >
 			 								<span class="glyphicon glyphicon-pencil"></span>

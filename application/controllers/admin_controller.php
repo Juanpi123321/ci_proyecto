@@ -262,7 +262,7 @@ class Admin_controller extends CI_Controller {
 		$this->load->view('plantillas/footer');
 	}
 
-  public function ventas()
+  public function ventas_clientes()
   {
     $data['title']= 'Ventas';
     $this->load->view('plantillas/header',$data);
@@ -277,7 +277,26 @@ class Admin_controller extends CI_Controller {
     $data['facturas_cabecera'] = $this->admin_model->select_facturas_fechas($fecha_busqueda);   
     $data['facturas_fechas'] = $this->admin_model->select_facturas_cabecera();
     $data['fecha_busqueda'] = $fecha_busqueda;
-    $this->load->view('paginas/ventas_admin', $data);
+    $this->load->view('paginas/ventas_clientes_admin', $data);
+    $this->load->view('plantillas/footer');
+  }
+
+  public function ventas_categoria()
+  {
+    $data['title']= 'Ventas';
+    $this->load->view('plantillas/header',$data);
+
+    $datos = array('inicio' => '', 'usuarios' => '', 'productos' => '', 'ventas' => 'active', 'consultas' => '');
+    $this->verificar_admin($datos);
+    
+    $this->load->model('admin_model');
+    $categoria_busqueda = $this->input->post('categoria_busqueda');
+
+    $data['facturas_completa'] = $this->admin_model->select_facturas_completa();
+    $data['facturas_cabecera'] = $this->admin_model->select_facturas_categoria($categoria_busqueda);   
+    $data['facturas_fechas'] = $this->admin_model->select_facturas_cabecera();
+    $data['categoria_busqueda'] = $categoria_busqueda;
+    $this->load->view('paginas/ventas_categoria_admin', $data);
     $this->load->view('plantillas/footer');
   }
 
