@@ -271,8 +271,12 @@ class Admin_controller extends CI_Controller {
     $this->verificar_admin($datos);
     
     $this->load->model('admin_model');
+    $fecha_busqueda = $this->input->post('fecha_busqueda');
+
     $data['facturas_completa'] = $this->admin_model->select_facturas_completa();
-    $data['facturas_cabecera'] = $this->admin_model->select_facturas_cabecera();
+    $data['facturas_cabecera'] = $this->admin_model->select_facturas_fechas($fecha_busqueda);   
+    $data['facturas_fechas'] = $this->admin_model->select_facturas_cabecera();
+    $data['fecha_busqueda'] = $fecha_busqueda;
     $this->load->view('paginas/ventas_admin', $data);
     $this->load->view('plantillas/footer');
   }

@@ -137,6 +137,18 @@ class Admin_model extends CI_Model
       return $query->result();
   }
 
+  public function select_facturas_fechas($fecha_busqueda){
+      $this->db->select('*');       
+      $this->db->from('factura');
+      if (!empty($fecha_busqueda)):       
+        $this->db->where('fecha', $fecha_busqueda);        
+      endif;
+      $this->db->join('personas', 'personas.Id_persona = factura.cliente_id');
+      $this->db->join('forma_pago', 'forma_pago.Id_forma_pago = factura.forma_pago_id');
+      $query = $this->db->get();
+      return $query->result();
+  }
+
   /*CONSULTAS*/
   public function select_consultas()
   {       

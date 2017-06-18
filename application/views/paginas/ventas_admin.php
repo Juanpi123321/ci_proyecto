@@ -5,9 +5,35 @@
 			<div class="row">
 				<br>
 				<div class="titulo text-center">
-					<h2>LISTADO DE VENTAS</h2>
+					<h2>GESTION DE VENTAS</h2>
 				</div>
-				<br><br>
+				<br>
+				<div class="row">
+				    <div class="col-xs-2 col-xs-offset-1 col-sm-4 col-sm-offset-3 col-md-6 col-md-offset-1">
+				    	<br><br>
+				    	<?php if (!empty($fecha_busqueda)): ?>
+				    		<h2>Fecha: "<?php echo $fecha_busqueda?>"</h2>	
+				    	<?php endif;?>			    	        
+				    </div>
+				    <div class="col-xs-6 col-xs-offset-2 col-sm-4 col-sm-offset-0 col-md-4 col-md-offset-1">
+				    	<?php echo form_open("admin_controller/ventas"); ?>
+
+				    	<label class="control-label">Fecha:&nbsp</label>
+				    	<?php $opciones = array( 0 => 'Ver todas');
+					    		foreach ($facturas_fechas as $row)
+					    		{
+					    			$opciones[$row->fecha] = 	$row->fecha;
+					    		}
+						echo form_dropdown('fecha_busqueda', $opciones, '0'); 
+						echo form_submit('Listar','Listar',"class='btn btn-primary'"); ?>
+
+				    </div>
+				    <?php echo form_close();?>
+				</div>
+				<br>
+				<br>
+				<br>
+				<br>
 				<!-- Tabla de Ventas -->               
 				 <div class="row">      
 				 	<div class="col-xs-12 col-md-offset-0">          
@@ -19,7 +45,6 @@
 				 				<th>Fecha</th>
 				 				<th>Hora</th>
 				 				<th>Forma de Pago</th>
-				 				<!-- <th>Total</th> -->
 				 				<th>Detalle</th>
 				 			</thead>     
 
