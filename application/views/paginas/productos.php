@@ -17,10 +17,10 @@
 			<!-- productos -->
 				<div class="col-md-6">
 					<div class="row">
-						<div class="col-xs-12 col-sm-6 col-md-6">
-							<br><img src="<?php echo base_url('uploads/img_productos/') . $row->imagen?>" class="img-responsive"/>
+						<div class="col-xs-8 col-xs-offset-2 col-sm-5 col-sm-offset-1 col-md-6 col-md-offset-0">
+							<br><img src="<?php echo base_url('uploads/img_productos/') . $row->imagen?>" height="200" width="200" />
 						</div>
-						<div class="col-xs-12 col-sm-6 col-md-6 text-justify">
+						<div class="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-0 col-md-6 col-md-offset-0 text-justify">
 								<h3><?php  echo $row->nombre; ?></h3>
 								<p><?php  echo $row->caracteristica; ?></p>
 								<br>
@@ -32,7 +32,7 @@
 						</div>									
 					</div>
 					<div class="row">
-						<div class="col-xs-10 col-xs-offset-2 col-sm-4 col-md-4 col-md-offset-1">
+						<div class="col-xs-10 col-xs-offset-2 col-sm-4 col-sm-offset-1 col-md-4 col-md-offset-1">
 							<h3 style="font-size: xx-large;">$<?php  echo $row->precio; ?></h3>
 						</div>
 						<div class="col-xs-10 col-xs-offset-2 col-sm-offset-1 col-sm-4 col-md-6 col-md-offset-1"  style="padding-top: 15px">
