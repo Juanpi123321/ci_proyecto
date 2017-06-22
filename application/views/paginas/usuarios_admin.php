@@ -44,7 +44,7 @@
 				 					<td><?php  echo $row->direccion; ?></td>
 				 					<td><?php  echo $row->tipo_rol; ?></td>		 					
 				 					<td><a class="btn" href="<?php echo base_url("admin_controller/imagen_usuario/$row->Id_usuario");?>" >
-				 							<img src="<?php echo base_url('uploads/img_usuarios/') . $row->imagen?>" height="100" width="100"/>
+				 							<img src="<?php echo base_url('uploads/img_usuarios/') . $row->imagen?>" height="100" width="100">
 				 						</a>
 				 					</td>
 					                <td>
@@ -67,8 +67,6 @@
 							                	</a>
 							                </td>  
 							     		<?php }    ?>
-
-
 				                </tr>
 				                <?php    } ?>
 				            </tbody> 
@@ -76,8 +74,6 @@
 				    	<br>
 				    </div> 
 				</div> 
-
-
 				<br>
 			</div>
 

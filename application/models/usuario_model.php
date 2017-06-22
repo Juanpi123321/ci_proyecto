@@ -20,6 +20,16 @@ class Usuario_model extends CI_Model
         			  return $resultado;
                         }
 
+  public function  buscar_usuario_id($id)
+  {
+                            $this->db->select('*');
+                            $this->db->from('usuarios');
+                            $this->db->where('Id_usuario', $id);
+                            $query = $this->db->get();
+          $resultado = $query->row();
+                return $resultado;
+                        }
+
   public function buscar_persona($Id_persona)
   {
                             $this->db->select('*');

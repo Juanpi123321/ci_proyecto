@@ -36,7 +36,7 @@
 				 			<tbody>      
 				 				<?php foreach($productos as $row) { ?>  
 				 				<tr>   
-				 					<td><img src="<?php echo base_url('uploads/img_productos/') . $row->imagen?>" height="200" width="200" /></td>           
+				 					<td><img src="<?php echo base_url('uploads/img_productos/') . $row->imagen?>" height="200" width="200"></td>           
 				 					<td><?php  echo $row->nombre; ?></td>
 				 					<td><?php  echo $row->caracteristica?></td>
 				 					<td><?php  echo $row->stock; ?></td>
@@ -70,14 +70,6 @@
 				    	<br>
 				    </div> 
 				</div>
-
-
-
-
-
-
-
-
 				<br>
 			</div>
 

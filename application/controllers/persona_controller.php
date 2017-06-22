@@ -9,31 +9,6 @@ class Persona_controller extends CI_Controller {
         			parent::__construct();
     			}
 
-public function index()
-  {
-
-    $data['title']= 'Bienvenido a Pc-Gamer';
-    $this->load->view('plantillas/header',$data);
-
-    $datos = array('inicio' => '', 'contacto' => '', 'nosotros' => '', 'productos' => '');
-    /*aca no le puse el "seleccionar_nav" xq esta en el otro controlador*/
-    if ($this->session->userdata('login'))
-        {
-          $datos['nombres'] = $this->session->userdata('nombres');
-          $datos['apellidos'] = $this->session->userdata('apellidos');
-          $datos['imagen'] = $this->session->userdata('imagen');
-          $datos['nombre_usuario'] = $this->session->userdata('nombre_usuario');
-          $this->load->view('plantillas/nav_salir',$datos); 
-        } else {
-                $this->load->view('plantillas/nav_ingresar',$datos);
-        }
-
-    $this->load->view('paginas/productos');
-    $this->load->view('plantillas/footer');
-   
-}
-
-
 public function registracion()
   {
     $data['title']= 'Registracion';
@@ -142,7 +117,31 @@ public function insertar_persona()
       /*recupera el ultimo id creado incremental*/
       $id = $this->db->insert_id();
       $this->persona_model->guardar_usuario($id, $usuario, $password); 
+      $this->login_primera_vez($id);
       }
  }
+
+function login_primera_vez($id)
+  {
+      $this->load->model('usuario_model');
+      $usuario = $this->usuario_model->buscar_usuario_id($id);
+
+       $persona_id = $usuario ->persona_id;
+       $persona = $this->usuario_model->buscar_persona($persona_id);
+       $datos_usuario = array(
+         'Id_usuario' => $usuario->Id_usuario,
+         'nombre_usuario' => $usuario->usuario,
+         'email' => $persona->email,
+         'direccion' => $persona->direccion,
+         'dni' => $persona->dni,
+         'imagen' => $persona->imagen,
+         'nombres' => $persona->nombres,
+         'apellidos' => $persona->apellidos,
+         'rol' =>$persona->rol_id,
+         'login' => TRUE
+          );
+                    $this->session->set_userdata($datos_usuario);
+        redirect('pcgamer/productos');
+    }
 
 }

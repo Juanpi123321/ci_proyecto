@@ -25,7 +25,6 @@ class Persona_model extends CI_Model
             );
 
             $this->db->insert('usuarios', $data);
-            redirect('persona_controller');
         
 }
 
