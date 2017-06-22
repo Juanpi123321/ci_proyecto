@@ -29,9 +29,10 @@ class Pcgamer extends CI_Controller {
 	    $datos = array('inicio' => '', 'contacto' => '', 'nosotros' => '', 'productos' => 'active');
 	    $this->seleccionar_nav($datos);
 
-	    $this->load->model('admin_model');
-	    $productos['productos'] = $this->admin_model->select_productos();
-	    $this->load->view('paginas/productos', $productos);
+	    /*paginacion*/
+	    $this->listar_productos();
+
+	    //la vista se carga en la funcion listar_productos()
 	    $this->load->view('plantillas/footer');
    
     }
@@ -141,4 +142,42 @@ class Pcgamer extends CI_Controller {
                         </script>"; 
       }
 
+    function listar_productos(){
+		$this->load->library('pagination');
+		$config['full_tag_open'] = '<ul class="pagination">';
+		$config['full_tag_close'] = '</ul>';
+		$config['num_tag_open'] = '<li>';
+		$config['num_tag_close'] = '</li>';
+		$config['cur_tag_open'] = '<li class="active"><span>';
+		$config['cur_tag_close'] = '<span></span></span></li>';
+		$config['prev_tag_open'] = '<li>';
+		$config['prev_tag_close'] = '</li>';
+		$config['next_tag_open'] = '<li>';
+		$config['next_tag_close'] = '</li>';
+		$config['first_tag_open'] = '<li>';
+		$config['first_tag_close'] = '</li>';
+		$config['last_tag_open'] = '<li>';
+		$config['last_tag_close'] = '</li>'; 
+
+
+		$config['base_url']=base_url().'pcgamer/productos/';
+
+		$config['first_link']='Primero';
+		$config['prev_link']='Anterior';
+		$config['last_link']='Ultimo';
+		$config['next_link']='Siguiente';
+
+		$this->load->model('admin_model');
+
+		$config['total_rows']=count($this->admin_model->select_productos());
+		$config['per_page']=4;
+		$config['num_links']=2;
+		$config["uri_segment"]=3;
+
+		$this->pagination->initialize($config);
+		$page=$this->uri->segment(3);
+
+		$productos['productos'] = $this->admin_model->paginas_mostrar(4,$page);
+		$this->load->view('paginas/productos', $productos);
+	}
 }

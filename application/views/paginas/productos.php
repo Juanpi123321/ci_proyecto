@@ -65,6 +65,11 @@
 				</div>
 				<?php    } ?>
 			</div>
+			<div class="row">
+				<div class="col-xs-4 col-xs-offset-8">
+					<?php echo $this->pagination->create_links();?>	
+				</div>
+			</div>
 			<br><br>
 		</div>
 	</div>

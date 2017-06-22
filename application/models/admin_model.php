@@ -83,9 +83,19 @@ class Admin_model extends CI_Model
       $this->db->select('*'); 
       $this->db->from('productos');
       $this->db->join('categoria', 'categoria.Id_categoria = productos.categoria_id');
-      /*solo mustra los productos activos*/
-      //$this->db->where('estado', "1");       
+      /*$this->db->where('estado', "1");*/
       $query = $this->db->get();       
+      return $query->result();         
+  }
+
+  public function paginas_mostrar($limit,$row)
+  {       
+      $this->db->select('*'); 
+      $this->db->from('productos');
+      $this->db->join('categoria', 'categoria.Id_categoria = productos.categoria_id');
+      $this->db->where('estado', "1");
+      $query = $this->db->get();
+      $query=$this->db->get('productos',$limit,$row);      
       return $query->result();         
   }
 
