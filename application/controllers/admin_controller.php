@@ -262,7 +262,7 @@ class Admin_controller extends CI_Controller {
 		$this->load->view('plantillas/footer');
 	}
 
-  public function ventas_clientes()
+  /*public function ventas_clientes()
   {
     $data['title']= 'Ventas';
     $this->load->view('plantillas/header',$data);
@@ -278,6 +278,18 @@ class Admin_controller extends CI_Controller {
     $data['facturas_fechas'] = $this->admin_model->select_facturas_cabecera();
     $data['fecha_busqueda'] = $fecha_busqueda;
     $this->load->view('paginas/ventas_clientes_admin', $data);
+    $this->load->view('plantillas/footer');
+  }*/
+
+  public function ventas_clientes()
+  {
+    $data['title']= 'Ventas';
+    $this->load->view('plantillas/header',$data);
+
+    $datos = array('inicio' => '', 'usuarios' => '', 'productos' => '', 'ventas' => 'active', 'consultas' => '');
+    $this->verificar_admin($datos);
+    /*paginacion*/    
+    $this->listar_ventas();
     $this->load->view('plantillas/footer');
   }
 
@@ -466,4 +478,49 @@ class Admin_controller extends CI_Controller {
         return $this->load->view('plantillas/nav_ingresar',$datos);
         }
   }
+
+  function listar_ventas(){
+    $this->load->library('pagination');
+    $config['full_tag_open'] = '<ul class="pagination">';
+    $config['full_tag_close'] = '</ul>';
+    $config['num_tag_open'] = '<li>';
+    $config['num_tag_close'] = '</li>';
+    $config['cur_tag_open'] = '<li class="active"><span>';
+    $config['cur_tag_close'] = '<span></span></span></li>';
+    $config['prev_tag_open'] = '<li>';
+    $config['prev_tag_close'] = '</li>';
+    $config['next_tag_open'] = '<li>';
+    $config['next_tag_close'] = '</li>';
+    $config['first_tag_open'] = '<li>';
+    $config['first_tag_close'] = '</li>';
+    $config['last_tag_open'] = '<li>';
+    $config['last_tag_close'] = '</li>'; 
+
+
+    $config['base_url']=base_url().'admin_controller/ventas_clientes';
+
+    $config['first_link']='Primero';
+    $config['prev_link']='Anterior';
+    $config['last_link']='Ultimo';
+    $config['next_link']='Siguiente';
+
+    $this->load->model('admin_model');
+    $fecha_busqueda = $this->input->post('fecha_busqueda');
+    $data['facturas_completa'] = $this->admin_model->select_facturas_completa();
+    $data['facturas_cabecera'] = $this->admin_model->select_facturas_fechas($fecha_busqueda);  
+    $data['facturas_fechas'] = $this->admin_model->select_facturas_cabecera();
+    $data['fecha_busqueda'] = $fecha_busqueda;
+
+    $config['total_rows']=count($data['facturas_cabecera']);
+    $config['per_page']=5;
+    $config['num_links']=2;
+    $config["uri_segment"]=3;
+
+    $this->pagination->initialize($config);
+    $page=$this->uri->segment(3);
+
+    $data['facturas_cabecera'] = $this->admin_model->ventas_mostrar(5,$page,$fecha_busqueda);
+    $this->load->view('paginas/ventas_clientes_admin', $data);
+  }
+
 }

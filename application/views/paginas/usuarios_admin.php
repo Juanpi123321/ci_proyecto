@@ -12,14 +12,15 @@
 				    <div class="col-xs-8 col-xs-offset-1 col-sm-8 col-sm-offset-1 col-md-6 col-md-offset-3">
 				    	<h1 class="page-header" style="text-align:center;">Listado de Usuarios</h1>        
 				    </div>
-				    <div class="col-xs-1 col-xs-offset-0 col-sm-1 col-sm-offset-0 col-md-offset-1">
+				    <div style="margin-right: 25px;" class="text-right">
 				    	<a href="<?php echo base_url(); ?>/admin_controller/registracion_admin"><button class="btn btn-primary">Nuevo Usuario</button></a>
-				    </div>
+				    </div><br>
 				</div>        
 				 <!-- Tabla de Usuarios -->               
 				 <div class="row">      
-				 	<div class="col-xs-12 col-md-offset-0">          
-				 		<table id="tusuarios" class="table table-bordred table-striped table-hover">       
+				 	<div class="col-xs-12 col-md-offset-0">  
+				 	  <div class="table-responsive">
+				 		<table id="tusuarios" class="table table-condensed table-striped table-hover">       
 				 			<thead>                            
 				 				<th>Usuario</th>                            
 				 				<th>Email</th>                            
@@ -72,7 +73,8 @@
 				            </tbody> 
 				    	</table>  
 				    	<br>
-				    </div> 
+				      </div>
+				    </div>
 				</div> 
 				<br>
 			</div>

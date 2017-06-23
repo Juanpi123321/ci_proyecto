@@ -10,8 +10,9 @@
 				<br><br>
 				<!-- Tabla de Consultas hechas por los usuarios -->               
 				 <div class="row">      
-				 	<div class="col-xs-12 col-md-offset-0">          
-				 		<table id="tproductos" class="table table-bordred table-striped table-hover">       
+				 	<div class="col-xs-12 col-md-offset-0">  
+				 	  <div class="table-responsive">        
+				 		<table id="tproductos" class="table table-striped table-hover">       
 				 			<thead>           
 				 				<th></th> 
 				 				<th>Fecha</th>                
@@ -52,6 +53,7 @@
 				            </tbody> 
 				    	</table>  
 				    	<br>
+				      </div>
 				    </div> 
 				</div>
 				<br>

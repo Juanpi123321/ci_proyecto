@@ -66,7 +66,7 @@
 				<?php    } ?>
 			</div>
 			<div class="row">
-				<div class="col-xs-4 col-xs-offset-8">
+				<div style="margin-right: 25px;" class="text-right">
 					<?php echo $this->pagination->create_links();?>	
 				</div>
 			</div>

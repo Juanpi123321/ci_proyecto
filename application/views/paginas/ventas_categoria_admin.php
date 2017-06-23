@@ -9,7 +9,7 @@
 				</div>
 				<br>
 				<div class="row">
-				    <div class="col-xs-8 col-xs-offset-4 col-sm-4 col-sm-offset-8 col-md-4 col-md-offset-8">
+				    <div style="margin-right: 50px;" class="text-right">
 				    	<?php echo form_open("admin_controller/ventas_categoria"); ?>
 
 				    	<label class="control-label">Categoria:&nbsp</label>
@@ -37,8 +37,9 @@
 				<br>
 				<!-- Tabla de Ventas -->               
 				 <div class="row">      
-				 	<div class="col-xs-12 col-md-offset-0">          
-				 		<table id="tproductos" class="table table-bordred table-striped table-hover">       
+				 	<div class="col-xs-12 col-md-offset-0">   
+				 	  <div class="table-responsive">       
+				 		<table id="tproductos" class="table table-condensed table-striped table-hover">       
 				 			<thead>
 				 				<th></th>       
 				 				<th>Cliente</th>
@@ -71,7 +72,8 @@
 										      <!-- tomo el id de la factura cabecera -->
 										      <?php $Id_factura = $row->Id_factura;?>
 										      <div class="modal-body">
-										        <table id="tproductos" class="table table-bordred table-striped table-hover">       
+										      <div class="table-responsive">
+										        <table id="tproductos" class="table table-condensed table-striped table-hover">       
 													  <thead>            
 														<th>Imagen del producto</th>                
 														<th>Nombre</th>
@@ -98,6 +100,7 @@
 														</tbody>
 													  </table>
 
+									      	  </div>
 									      </div>
 									      <div class="modal-footer">
 									        <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
@@ -111,6 +114,7 @@
 				            </tbody> 
 				    	</table>  
 				    	<br>
+				      </div>
 				    </div> 
 				</div>
 				<br>
