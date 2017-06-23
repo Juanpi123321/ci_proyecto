@@ -14,6 +14,7 @@ class Admin_model extends CI_Model
       $this->db->insert('personas', $data);
   }
 
+  /*USUARIOS*/
 
   public function guardar_usuario($id, $usuario, $password)
   {
@@ -76,6 +77,17 @@ class Admin_model extends CI_Model
       return $query->result();    
   }
 
+  public function usuarios_mostrar($limit,$row)
+  {
+      $this->db->select('*');
+      $this->db->from('usuarios');
+      $this->db->limit($limit,$row);
+      $this->db->join('personas', 'personas.Id_persona = usuarios.persona_id');
+      $this->db->join('rol', 'rol.Id_rol = personas.rol_id');
+      $query = $this->db->get();
+      return $query->result();
+  }
+
   /*PRODUCTOS*/
 
   public function select_productos()
@@ -83,19 +95,30 @@ class Admin_model extends CI_Model
       $this->db->select('*'); 
       $this->db->from('productos');
       $this->db->join('categoria', 'categoria.Id_categoria = productos.categoria_id');
-      /*$this->db->where('estado', "1");*/
+      $this->db->where('estado', "1");
       $query = $this->db->get();       
       return $query->result();         
   }
 
-  public function paginas_mostrar($limit,$row)
+  public function productos_mostrar($limit,$row)
   {       
       $this->db->select('*'); 
       $this->db->from('productos');
+      $this->db->limit($limit,$row);
       $this->db->join('categoria', 'categoria.Id_categoria = productos.categoria_id');
       $this->db->where('estado', "1");
       $query = $this->db->get();
-      $query=$this->db->get('productos',$limit,$row);      
+      return $query->result();         
+  }
+
+  public function productos_mostrar_admin($limit,$row)
+  {       
+      $this->db->select('*'); 
+      $this->db->from('productos');
+      $this->db->limit($limit,$row);
+      $this->db->join('categoria', 'categoria.Id_categoria = productos.categoria_id');
+      /*$this->db->where('estado', "1");*/
+      $query = $this->db->get();
       return $query->result();         
   }
 
@@ -149,7 +172,7 @@ class Admin_model extends CI_Model
       return $query->result();
   }
 
-  public function ventas_mostrar($limit,$row,$fecha_busqueda)
+  public function ventas_mostrar_clientes($limit,$row,$fecha_busqueda)
   {       
       $this->db->select('*');       
       $this->db->from('factura');
@@ -170,6 +193,23 @@ class Admin_model extends CI_Model
       $this->db->order_by('fecha', 'asc');
       if (!empty($fecha_busqueda)):       
         $this->db->where('fecha', $fecha_busqueda);       
+      endif;
+      $this->db->join('personas', 'personas.Id_persona = factura.cliente_id');
+      $this->db->join('forma_pago', 'forma_pago.Id_forma_pago = factura.forma_pago_id');
+      $query = $this->db->get();
+      return $query->result();
+  }
+
+  public function ventas_mostrar_categoria($limit,$row,$categoria_busqueda){
+      $this->db->select('*');       
+      $this->db->from('factura');      
+      $this->db->limit($limit,$row);
+      $this->db->order_by('fecha', 'asc');
+      $this->db->join('factura_detalle', 'factura_detalle.factura_id = factura.Id_factura');
+      $this->db->join('productos', 'productos.Id_producto = factura_detalle.producto_id');
+      $this->db->join('categoria', 'categoria.Id_categoria = productos.categoria_id');
+      if (!empty($categoria_busqueda)):       
+        $this->db->where('descripcion_categoria', $categoria_busqueda);        
       endif;
       $this->db->join('personas', 'personas.Id_persona = factura.cliente_id');
       $this->db->join('forma_pago', 'forma_pago.Id_forma_pago = factura.forma_pago_id');

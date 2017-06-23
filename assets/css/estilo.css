@@ -49,6 +49,7 @@ nav.navbar{
 /*los elementos de la barra*/
 .navbar-default .navbar-nav > li > a{
     color: ghostwhite;
+    margin-left: 0.8px;
 }
 /*navbar de administrativo*/
 nav.navbar-admin, .navbar-admin .dropdown-menu > li > a,
@@ -109,6 +110,23 @@ nav.navbar-admin, .navbar-admin .dropdown-menu > li > a,
 	color: white;
 	background: #9C1717;
 	border: none;
+}
+/*cambiar el color de pagination*/
+.pagination > .active > a, .pagination > .active > span,
+.pagination > .active > a:hover, .pagination > .active > span:hover, 
+.pagination > .active > a:focus, .pagination > .active > span:focus{
+    background-color: #BB1717;
+    border-color: white;    
+}
+.pagination > li > a, .pagination > li > span {
+    color: black;
+}
+.pagination > li > a:hover, 
+.pagination > li > span:hover, .pagination > li > a:focus, 
+.pagination > li > span:focus{
+    color: white;
+    background-color: #BB1717;
+    border-color: white;
 }
 
 /*el menu de moviles tambien para tablets*/

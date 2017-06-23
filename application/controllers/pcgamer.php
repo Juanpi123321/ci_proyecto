@@ -177,7 +177,7 @@ class Pcgamer extends CI_Controller {
 		$this->pagination->initialize($config);
 		$page=$this->uri->segment(3);
 
-		$productos['productos'] = $this->admin_model->paginas_mostrar(4,$page);
+		$productos['productos'] = $this->admin_model->productos_mostrar(4,$page);
 		$this->load->view('paginas/productos', $productos);
 	}
 }

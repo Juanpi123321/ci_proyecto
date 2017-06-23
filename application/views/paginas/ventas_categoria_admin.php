@@ -117,7 +117,12 @@
 				      </div>
 				    </div> 
 				</div>
-				<br>
+				<br>		
+			    	<div class="row">
+						<div style="margin-right: 25px;" class="text-right">
+							<?php echo $this->pagination->create_links();?>	
+						</div>
+					</div>
 			</div>
 			<br><br>
 		</div>

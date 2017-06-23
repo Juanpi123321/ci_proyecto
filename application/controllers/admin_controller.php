@@ -39,9 +39,8 @@ class Admin_controller extends CI_Controller {
 		$datos = array('inicio' => '', 'usuarios' => 'active', 'productos' => '', 'ventas' => '', 'consultas' => '');
     $this->verificar_admin($datos);
 
-		$this->load->model('admin_model');
-		$data['usuarios'] = $this->admin_model->select_usuarios();
-		$this->load->view('paginas/usuarios_admin', $data);
+    /*paginacion*/    
+    $this->listar_usuarios();
 		$this->load->view('plantillas/footer');
 	}
 
@@ -255,31 +254,10 @@ class Admin_controller extends CI_Controller {
 
 		$datos = array('inicio' => '', 'usuarios' => '', 'productos' => 'active', 'ventas' => '', 'consultas' => '');
     $this->verificar_admin($datos);
-    
-    $this->load->model('admin_model');
-    $data['productos'] = $this->admin_model->select_productos();
-    $this->load->view('paginas/productos_admin', $data);
+    /*paginacion*/    
+    $this->listar_productos();
 		$this->load->view('plantillas/footer');
 	}
-
-  /*public function ventas_clientes()
-  {
-    $data['title']= 'Ventas';
-    $this->load->view('plantillas/header',$data);
-
-    $datos = array('inicio' => '', 'usuarios' => '', 'productos' => '', 'ventas' => 'active', 'consultas' => '');
-    $this->verificar_admin($datos);
-    
-    $this->load->model('admin_model');
-    $fecha_busqueda = $this->input->post('fecha_busqueda');
-
-    $data['facturas_completa'] = $this->admin_model->select_facturas_completa();
-    $data['facturas_cabecera'] = $this->admin_model->select_facturas_fechas($fecha_busqueda);   
-    $data['facturas_fechas'] = $this->admin_model->select_facturas_cabecera();
-    $data['fecha_busqueda'] = $fecha_busqueda;
-    $this->load->view('paginas/ventas_clientes_admin', $data);
-    $this->load->view('plantillas/footer');
-  }*/
 
   public function ventas_clientes()
   {
@@ -289,7 +267,7 @@ class Admin_controller extends CI_Controller {
     $datos = array('inicio' => '', 'usuarios' => '', 'productos' => '', 'ventas' => 'active', 'consultas' => '');
     $this->verificar_admin($datos);
     /*paginacion*/    
-    $this->listar_ventas();
+    $this->listar_ventas_clientes();
     $this->load->view('plantillas/footer');
   }
 
@@ -300,15 +278,8 @@ class Admin_controller extends CI_Controller {
 
     $datos = array('inicio' => '', 'usuarios' => '', 'productos' => '', 'ventas' => 'active', 'consultas' => '');
     $this->verificar_admin($datos);
-    
-    $this->load->model('admin_model');
-    $categoria_busqueda = $this->input->post('categoria_busqueda');
-
-    $data['facturas_completa'] = $this->admin_model->select_facturas_completa();
-    $data['facturas_cabecera'] = $this->admin_model->select_facturas_categoria($categoria_busqueda);   
-    $data['facturas_fechas'] = $this->admin_model->select_facturas_cabecera();
-    $data['categoria_busqueda'] = $categoria_busqueda;
-    $this->load->view('paginas/ventas_categoria_admin', $data);
+    /*paginacion*/    
+    $this->listar_ventas_categoria();
     $this->load->view('plantillas/footer');
   }
 
@@ -479,30 +450,10 @@ class Admin_controller extends CI_Controller {
         }
   }
 
-  function listar_ventas(){
+  function listar_ventas_clientes(){
     $this->load->library('pagination');
-    $config['full_tag_open'] = '<ul class="pagination">';
-    $config['full_tag_close'] = '</ul>';
-    $config['num_tag_open'] = '<li>';
-    $config['num_tag_close'] = '</li>';
-    $config['cur_tag_open'] = '<li class="active"><span>';
-    $config['cur_tag_close'] = '<span></span></span></li>';
-    $config['prev_tag_open'] = '<li>';
-    $config['prev_tag_close'] = '</li>';
-    $config['next_tag_open'] = '<li>';
-    $config['next_tag_close'] = '</li>';
-    $config['first_tag_open'] = '<li>';
-    $config['first_tag_close'] = '</li>';
-    $config['last_tag_open'] = '<li>';
-    $config['last_tag_close'] = '</li>'; 
-
-
+    $config = $this->estilo_bootstrap();
     $config['base_url']=base_url().'admin_controller/ventas_clientes';
-
-    $config['first_link']='Primero';
-    $config['prev_link']='Anterior';
-    $config['last_link']='Ultimo';
-    $config['next_link']='Siguiente';
 
     $this->load->model('admin_model');
     $fecha_busqueda = $this->input->post('fecha_busqueda');
@@ -519,8 +470,96 @@ class Admin_controller extends CI_Controller {
     $this->pagination->initialize($config);
     $page=$this->uri->segment(3);
 
-    $data['facturas_cabecera'] = $this->admin_model->ventas_mostrar(5,$page,$fecha_busqueda);
+    $data['facturas_cabecera'] = $this->admin_model->ventas_mostrar_clientes(5,$page,$fecha_busqueda);
     $this->load->view('paginas/ventas_clientes_admin', $data);
+  }
+
+  function listar_ventas_categoria(){
+    $this->load->library('pagination');
+    $config = $this->estilo_bootstrap();
+
+    $config['base_url']=base_url().'admin_controller/ventas_categoria';
+
+    $this->load->model('admin_model');
+
+    $categoria_busqueda = $this->input->post('categoria_busqueda');
+    $data['facturas_completa'] = $this->admin_model->select_facturas_completa();
+    $data['facturas_cabecera'] = $this->admin_model->select_facturas_categoria($categoria_busqueda);   
+    $data['facturas_fechas'] = $this->admin_model->select_facturas_cabecera();
+    $data['categoria_busqueda'] = $categoria_busqueda;
+
+    $config['total_rows']=count($data['facturas_cabecera']);
+    $config['per_page']=10;
+    $config['num_links']=2;
+    $config["uri_segment"]=3;
+
+    $this->pagination->initialize($config);
+    $page=$this->uri->segment(3);
+
+    $data['facturas_cabecera'] = $this->admin_model->ventas_mostrar_categoria(10,$page,$categoria_busqueda);
+    $this->load->view('paginas/ventas_categoria_admin', $data);
+  }
+
+  function listar_productos(){
+    $this->load->library('pagination');
+    $config = $this->estilo_bootstrap();
+
+    $config['base_url']=base_url().'admin_controller/productos';
+
+    $this->load->model('admin_model');
+    $config['total_rows']=count($this->admin_model->select_productos());
+    $config['per_page']=5;
+    $config['num_links']=2;
+    $config["uri_segment"]=3;
+
+    $this->pagination->initialize($config);
+    $page=$this->uri->segment(3);
+
+    $data['productos'] = $this->admin_model->productos_mostrar_admin(5,$page);
+    $this->load->view('paginas/productos_admin', $data);
+  }
+
+  function listar_usuarios(){
+    $this->load->library('pagination');
+    $config = $this->estilo_bootstrap();
+
+    $config['base_url']=base_url().'admin_controller/usuarios';
+
+    $this->load->model('admin_model');
+    $config['total_rows']=count($this->admin_model->select_usuarios());
+    $config['per_page']=5;
+    $config['num_links']=2;
+    $config["uri_segment"]=3;
+
+    $this->pagination->initialize($config);
+    $page=$this->uri->segment(3);
+
+    $data['usuarios'] = $this->admin_model->usuarios_mostrar(5,$page);
+    $this->load->view('paginas/usuarios_admin', $data);
+  }    
+
+  function estilo_bootstrap()
+  {
+    $config['full_tag_open'] = '<ul class="pagination">';
+    $config['full_tag_close'] = '</ul>';
+    $config['num_tag_open'] = '<li>';
+    $config['num_tag_close'] = '</li>';
+    $config['cur_tag_open'] = '<li class="active"><span>';
+    $config['cur_tag_close'] = '<span></span></span></li>';
+    $config['prev_tag_open'] = '<li>';
+    $config['prev_tag_close'] = '</li>';
+    $config['next_tag_open'] = '<li>';
+    $config['next_tag_close'] = '</li>';
+    $config['first_tag_open'] = '<li>';
+    $config['first_tag_close'] = '</li>';
+    $config['last_tag_open'] = '<li>';
+    $config['last_tag_close'] = '</li>'; 
+
+    $config['first_link']='Primero';
+    $config['prev_link']='Anterior';
+    $config['last_link']='Ultimo';
+    $config['next_link']='Siguiente';
+    return $config;
   }
 
 }
